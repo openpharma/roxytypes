@@ -74,13 +74,13 @@
 <span><span class="va">hello</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">who</span> <span class="op">=</span> <span class="st">"World"</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Hello, "</span>, <span class="va">who</span>, <span class="st">"!\n"</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<p>Install the <code>roxytypes</code> package.</p>
+<p>Next order of business is to install the package and declare the <code>roxygen2</code> dependency.</p>
 <p><code>DESCRIPTION</code></p>
 <pre><code><span><span class="va">Config</span><span class="op">/</span><span class="va">Needs</span><span class="op">/</span><span class="va">documentation</span><span class="op">:</span></span>
 <span>    <span class="va">roxytypes</span></span>
 <span><span class="va">Roxygen</span><span class="op">:</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>markdown <span class="op">=</span> <span class="cn">TRUE</span>, packages <span class="op">=</span> <span class="st">"roxytypes"</span><span class="op">)</span></span></code></pre>
-<p>Rebuild your docs!</p>
+<p>With all of that set up, the only thing left is to rebuild your docs!</p>
 </div>
 <div class="section level2">
 <h2 id="configuring-formatting">Configuring Formatting<a class="anchor" aria-label="anchor" href="#configuring-formatting"></a>
@@ -107,6 +107,8 @@
 <span>  <span class="op">}</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Warnings emitted in the <code>checks</code> function will be raised through <code>roxygen2</code> when documentation is re-built and will include source information to help find offending tags.</p>
+<p>For example, the checks above emit warnings that look something like this:</p>
+<pre><code>Warning: [config.R:17] @typed Parameter descriptions should be 'Sentence case'</code></pre>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="license">
