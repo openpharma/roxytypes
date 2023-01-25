@@ -32,7 +32,8 @@ hello <- function(who = "World") {
 }
 ```
 
-Install the `roxytypes` package. 
+Next order of business is to install the package and declare the 
+`roxygen2` dependency. 
 
 `DESCRIPTION`
 ```
@@ -42,7 +43,7 @@ Roxygen:
     list(markdown = TRUE, packages = "roxytypes")
 ```
 
-Rebuild your docs!
+With all of that set up, the only thing left is to rebuild your docs!
 
 ## Configuring Formatting
 
@@ -82,3 +83,9 @@ list(
 Warnings emitted in the `checks` function will be raised through `roxygen2` when
 documentation is re-built and will include source information to help find
 offending tags.
+
+For example, the checks above emit warnings that look something like this:
+
+```
+Warning: [config.R:17] @typed Parameter descriptions should be 'Sentence case'
+```
