@@ -1,0 +1,20 @@
+Package: roxytypes
+Title: Provides Typed Parameter Tags for Integration with 'roxygen2'
+Version: 0.0.0.9000
+Authors@R:
+    c(
+      person(
+        "Doug", "Kelkhoff",
+        email = "doug.kelkhoff@gmail.com",
+        role = c("aut", "cre")
+      )
+    )
+Description: Provides typed parameter tags for integration with 'roxygen2'.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Imports:
+    roxygen2
+Config/Needs/documentation:
+    roxytypes
+Roxygen: list(markdown = TRUE, packages = "roxytypes")
+RoxygenNote: 7.2.3
