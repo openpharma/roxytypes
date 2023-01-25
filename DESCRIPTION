@@ -13,6 +13,8 @@ Description: Provides typed parameter tags for integration with 'roxygen2'.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Imports:
+    utils,
+    glue,
     roxygen2
 Config/Needs/documentation:
     roxytypes

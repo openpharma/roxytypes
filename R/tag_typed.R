@@ -19,6 +19,7 @@ roxy_tag_parse.roxy_tag_typed <- function(x) {  # nolint
 #'
 #' @inheritParams roxygen2::roxy_tag_rd
 #'
+#' @importFrom glue glue
 #' @importFrom roxygen2 roxy_tag_rd
 #' @exportS3Method
 roxy_tag_rd.roxy_tag_typed <- function(x, base_path, env) {  # nolint

@@ -2,5 +2,7 @@
 
 S3method(roxy_tag_parse,roxy_tag_typed)
 S3method(roxy_tag_rd,roxy_tag_typed)
+importFrom(glue,glue)
 importFrom(roxygen2,roxy_tag_parse)
 importFrom(roxygen2,roxy_tag_rd)
+importFrom(utils,packageName)

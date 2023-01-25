@@ -1,5 +1,6 @@
 #' Errors used internally
 #'
+#' @importFrom utils packageName
 #' @noRd
 errors <- list(
   # Multiple config options were used, likely accidentally
@@ -12,7 +13,7 @@ errors <- list(
   # While parsing a config from DESCRIPTION, a parse or eval failure occured
   description_parse_failure = function(msg) {
     paste0(
-      "Could not parse DESCRIPTION contents at Config/", packageName(), "\n",
+      "Could not parse DESCRIPTION contents at Config/", utils::packageName(), "\n",
       msg
     )
   },

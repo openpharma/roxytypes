@@ -4,8 +4,9 @@
 #' documentation is being built to avoid constantly parsing configurations
 #' during evaluation of each tag.
 #'
+#' @importFrom utils packageName
 #' @noRd
-CONFIG <- paste0(".", packageName(), "_config")  # nolint
+CONFIG <- paste0(".", utils::packageName(), "_config")  # nolint
 
 
 #' Configuration
@@ -100,11 +101,12 @@ config_from_desc <- function(path) {
 #' @describeIn config
 #' Load a configuration from a dotfile
 #'
+#' @importFrom utils packageName
 #' @keywords internal
 config_from_file <- function(path) {
   pattern <- "^meta\\.[rR]"
 
-  path <- file.path(path, "man", packageName())
+  path <- file.path(path, "man", utils::packageName())
   config_files <- list.files(
     path,
     pattern = pattern,
