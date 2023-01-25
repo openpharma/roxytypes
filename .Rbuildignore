@@ -1,0 +1,6 @@
+^LICENSE\.md$
+^\.roxytypes\.R$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^\.github$
