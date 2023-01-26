@@ -16,6 +16,8 @@ Imports:
     utils,
     glue,
     roxygen2
+Enhances:
+    roxylint
 Config/Needs/documentation:
     roxytypes
 Roxygen: list(markdown = TRUE, packages = "roxytypes")

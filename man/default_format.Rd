@@ -7,9 +7,9 @@
 default_format(x, name, type, description, ...)
 }
 \arguments{
-\item{x}{([roxygen2::roxy_tag()]) The tag to format.}
+\item{x}{[`[roxygen2::roxy_tag()]`] The tag to format.}
 
-\item{name, type, description}{(`character(1)`) Fields parsed from the `@typed` tag.}
+\item{name, type, description}{[`character(1)`] Fields parsed from the `@typed` tag.}
 
 \item{...}{Additional arguments unused.}
 }

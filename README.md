@@ -58,34 +58,24 @@ The format string uses `glue` and can be expected to have fields `name`, `type`
 and `description`. The parameter name will always be the named argument value,
 but may be reused for parts of the description.
 
-## Applying Style Checks
+## [`roxylint`](https://github.com/dgkf/roxylint) compatible
 
-If you'd like to enforce a style guide for your parameters, you can set checks
-as part of the config. This can be included in `Config/roxytypes`, but checking
-code will probably be cumbersome to author in this format. Instead, you can use
-`man/roxytypes/meta.R` which accepts the same format, but allows for more
-comfortable development.
+`@typed` tags come with their own `roxylint` linters. To benefit from linting of
+`@typed` tags, simply add the `roxylint::roxylint` roclet.
 
-`man/roxytypes/meta.R`
-```r
-list(
-  format = "(`{type}`): {description}",
-  checks = function(name, type, description) {
-    if (!endsWith(description, "."))
-      warning("Parameter descriptions must end with a period")
-
-    if (!grepl("^[[:upper:]`]", description))
-      warning("Parameter descriptions should be 'Sentence case'")
-  }
-)
+`DESCRIPTION`
+```
+Roxygen:
+  list(
+    markdown = TRUE,
+    packages = c("roxylint", "roxytypes"),
+    roclets = c("namespace", "rd", "roxylint::roxylint")
+  )
 ```
 
-Warnings emitted in the `checks` function will be raised through `roxygen2` when
-documentation is re-built and will include source information to help find
-offending tags.
+> ***tip!***
+>
+> If your `Roxygen` section gets too long, you can also put this content in
+> `man/roxygen/meta.R` where you can benefit from all the perks of your editor's
+> R file handling.
 
-For example, the checks above emit warnings that look something like this:
-
-```
-Warning: [config.R:17] @typed Parameter descriptions should be 'Sentence case'
-```

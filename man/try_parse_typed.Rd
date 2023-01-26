@@ -7,7 +7,7 @@
 try_parse_typed(raw)
 }
 \arguments{
-\item{raw}{(`character[1]`) A raw string from which to try to parse typed parameter definitions.}
+\item{raw}{[`character[1]`] A raw string from which to try to parse typed parameter definitions.}
 }
 \description{
 Parse a raw \verb{@typed} tag
