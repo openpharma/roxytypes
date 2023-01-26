@@ -18,6 +18,8 @@ Imports:
     roxygen2
 Enhances:
     roxylint
+Remotes:
+    roxylint=github::dgkf/roxylint
 Config/Needs/documentation:
     roxytypes
 Roxygen: list(markdown = TRUE, packages = "roxytypes")
