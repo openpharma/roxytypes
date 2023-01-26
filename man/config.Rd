@@ -4,7 +4,6 @@
 \name{config}
 \alias{config}
 \alias{.state}
-\alias{config_perform_checks}
 \alias{config_load}
 \alias{config_find_from}
 \alias{config_from_desc}
@@ -16,8 +15,6 @@ An object of class \code{environment} of length 0.
 \usage{
 .state
 
-config_perform_checks(config, x)
-
 config_load()
 
 config_find_from(path)
@@ -27,13 +24,13 @@ config_from_desc(path)
 config_from_file(path)
 }
 \arguments{
-\item{config}{[`list(format= , checks=)`] A list of configuration parameters.}
+\item{path}{(`character[1]`) A file path to use when searching for a config file. Either the file path to a `DESCRIPTION` or the root path of a package, depending on the context of the function.}
 
-\item{x}{[`roxy_tag`] An internal, intermediate `roxygen2` tag object upon which to evaluate configured behaviors.}
+\item{x}{(`roxy_tag`) An internal, intermediate `roxygen2` tag object upon which to evaluate configured behaviors.}
 
-\item{path}{[`character[1]`] A file path to use when searching for a config file. Either the file path to a `DESCRIPTION` or the root path of a package, depending on the context of the function.}
+\item{config}{(`list(format= )`) A list of configuration parameters.}
 
-\item{e}{[`environment`] A package environment used while running `roxygen2`.}
+\item{e}{(`environment`) A package environment used while running `roxygen2`.}
 }
 \description{
 Various functions for loading, caching and performing configured behaviors
@@ -41,8 +38,6 @@ using a user-supplied configuration file.
 }
 \section{Functions}{
 \itemize{
-\item \code{config_perform_checks()}: Perform checks provided by a config file
-
 \item \code{config_load()}: Load the contents of a config into an environment
 
 \item \code{config_find_from()}: Load a configuration from a path

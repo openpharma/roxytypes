@@ -24,13 +24,39 @@ roxy_tag_parse.roxy_tag_typed <- function(x) {  # nolint
 #' @exportS3Method
 roxy_tag_rd.roxy_tag_typed <- function(x, base_path, env) {  # nolint
   config <- config_load()
-  config_perform_checks(config, x)
+  format <- config$format %||% default_format
 
-  fmt <- config$format %||% "(`{type}`) {description}"
-  desc <- glue::glue(fmt, .envir = x$val)
+  desc <- if (is.function(format)) {
+    do.call(format, append(list(x), x$val))
+  } else {
+    glue::glue(format, .envir = x$val)
+  }
+
   names(desc) <- x$val$name
-
   roxygen2::rd_section("param", desc)
+}
+
+
+#' Default formatter for `@typed`
+#'
+#' Adds special cases for when the type uses other roxygen2 syntax
+#'
+#' @typed x: [roxygen2::roxy_tag()]
+#'   The tag to format.
+#' @typed name,type,description: character(1)
+#'   Fields parsed from the `@typed` tag.
+#' @param ... Additional arguments unused.
+#'
+#' @return A formatted character value.
+#'
+default_format <- function(x, name, type, description, ...) {
+  typestr <- type
+
+  # do not wrap roxygen links in code backticks
+  if (!grepl("^\\[.*\\]$", type))
+    typestr <- paste0("`", typestr, "`")
+
+  paste0("(", typestr, ") ", description)
 }
 
 
@@ -41,7 +67,7 @@ roxy_tag_rd.roxy_tag_typed <- function(x, base_path, env) {  # nolint
 #'
 #' @keywords internal
 try_parse_typed <- function(raw) {
-  re <- "(?<name>[^\\n]*):(?<type>[^\\n]*)\\n(?<description>(?:.|\\n)*)"
+  re <- "(?<name>[^\\n:]*):(?<type>[^\\n]*)\\n(?<description>(?:.|\\n)*)"
   tryCatch(
     regex_capture(re, raw, perl = TRUE),
     error = function(e) stop(call. = e$call, errors$parse_syntax)

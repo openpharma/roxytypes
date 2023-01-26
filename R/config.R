@@ -17,7 +17,7 @@ CONFIG <- paste0(".", utils::packageName(), "_config")  # nolint
 #' @typed x: roxy_tag
 #'   An internal, intermediate `roxygen2` tag object upon which to evaluate
 #'   configured behaviors.
-#' @typed config: list(format= , checks=)
+#' @typed config: list(format= )
 #'   A list of configuration parameters.
 #' @typed e: environment
 #'   A package environment used while running `roxygen2`.
@@ -28,22 +28,6 @@ CONFIG <- paste0(".", utils::packageName(), "_config")  # nolint
 #'
 #' @name config
 .state <- new.env(parent = emptyenv())
-
-
-#' @describeIn config
-#' Perform checks provided by a config file
-#'
-#' @keywords internal
-config_perform_checks <- function(config, x) {
-  if (is.null(config$checks)) return()
-  withCallingHandlers(
-    config$checks(x$val$name, x$val$type, x$val$description),
-    warning = function(w) {
-      roxygen2::warn_roxy_tag(x, w$message)
-      invokeRestart("muffleWarning")
-    }
-  )
-}
 
 
 #' @describeIn config
@@ -85,7 +69,7 @@ config_find_from <- function(path) {
 config_from_desc <- function(path) {
   path <- file.path(path, "DESCRIPTION")
 
-  field <- "Config/roxytypes"
+  field <- paste0("Config/", packageName())
   config_desc <- read.dcf(path, fields = field)[1, field]
 
   result <- tryCatch(

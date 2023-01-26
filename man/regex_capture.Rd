@@ -7,9 +7,9 @@
 regex_capture(pattern, x, ...)
 }
 \arguments{
-\item{pattern}{[`character[1]`] A regex pattern to use for capturing groups.}
+\item{pattern}{(`character[1]`) A regex pattern to use for capturing groups.}
 
-\item{x}{[`character`] A vector of strings to match against.}
+\item{x}{(`character`) A vector of strings to match against.}
 
 \item{...}{Additional arguments passed to \code{\link[=regexpr]{regexpr()}}.}
 }

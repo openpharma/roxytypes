@@ -6,8 +6,8 @@ errors <- list(
   # Multiple config options were used, likely accidentally
   redundant_config = paste0(
     "Redundant roxytypes configs found:\n",
-    " * DESCRIPTION [Config/roxytypes]\n",
-    " * ./.roxytypes(.R)"
+    " * DESCRIPTION [Config/", utils::packageName(), "]\n",
+    " * ./man/", utils::packageName(), "/meta.R"
   ),
 
   # While parsing a config from DESCRIPTION, a parse or eval failure occured
