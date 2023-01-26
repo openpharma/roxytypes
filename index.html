@@ -91,24 +91,21 @@
 <p>The format string uses <code>glue</code> and can be expected to have fields <code>name</code>, <code>type</code> and <code>description</code>. The parameter name will always be the named argument value, but may be reused for parts of the description.</p>
 </div>
 <div class="section level2">
-<h2 id="applying-style-checks">Applying Style Checks<a class="anchor" aria-label="anchor" href="#applying-style-checks"></a>
+<h2 id="roxylint-compatible">
+<a href="https://github.com/dgkf/roxylint" class="external-link"><code>roxylint</code></a> compatible<a class="anchor" aria-label="anchor" href="#roxylint-compatible"></a>
 </h2>
-<p>If you’d like to enforce a style guide for your parameters, you can set checks as part of the config. This can be included in <code>Config/roxytypes</code>, but checking code will probably be cumbersome to author in this format. Instead, you can use <code>man/roxytypes/meta.R</code> which accepts the same format, but allows for more comfortable development.</p>
-<p><code>man/roxytypes/meta.R</code></p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>  format <span class="op">=</span> <span class="st">"(`{type}`): {description}"</span>,</span>
-<span>  checks <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">name</span>, <span class="va">type</span>, <span class="va">description</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/startsWith.html" class="external-link">endsWith</a></span><span class="op">(</span><span class="va">description</span>, <span class="st">"."</span><span class="op">)</span><span class="op">)</span></span>
-<span>      <span class="kw"><a href="https://rdrr.io/r/base/warning.html" class="external-link">warning</a></span><span class="op">(</span><span class="st">"Parameter descriptions must end with a period"</span><span class="op">)</span></span>
-<span></span>
-<span>    <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"^[[:upper:]`]"</span>, <span class="va">description</span><span class="op">)</span><span class="op">)</span></span>
-<span>      <span class="kw"><a href="https://rdrr.io/r/base/warning.html" class="external-link">warning</a></span><span class="op">(</span><span class="st">"Parameter descriptions should be 'Sentence case'"</span><span class="op">)</span></span>
-<span>  <span class="op">}</span></span>
-<span><span class="op">)</span></span></code></pre></div>
-<p>Warnings emitted in the <code>checks</code> function will be raised through <code>roxygen2</code> when documentation is re-built and will include source information to help find offending tags.</p>
-<p>For example, the checks above emit warnings that look something like this:</p>
-<pre><code>Warning: [config.R:17] @typed Parameter descriptions should be 'Sentence case'</code></pre>
+<p><code>@typed</code> tags come with their own <code>roxylint</code> linters. To benefit from linting of <code>@typed</code> tags, simply add the <code><a href="https://rdrr.io/pkg/roxylint/man/roxylint.html" class="external-link">roxylint::roxylint</a></code> roclet.</p>
+<p><code>DESCRIPTION</code></p>
+<pre><code><span><span class="va">Roxygen</span><span class="op">:</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    markdown <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    packages <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"roxylint"</span>, <span class="st">"roxytypes"</span><span class="op">)</span>,</span>
+<span>    roclets <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"namespace"</span>, <span class="st">"rd"</span>, <span class="st">"roxylint::roxylint"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre>
+<blockquote>
+<p><strong><em>tip!</em></strong></p>
+<p>If your <code>Roxygen</code> section gets too long, you can also put this content in <code>man/roxygen/meta.R</code> where you can benefit from all the perks of your editor’s R file handling.</p>
+</blockquote>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="license">
