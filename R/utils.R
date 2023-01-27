@@ -5,6 +5,15 @@
 `%||%` <- function(lhs, rhs) if (is.null(lhs)) rhs else lhs
 
 
+vlapply <- function(..., FUN.VALUE = logical(1L)) {
+  vapply(..., FUN.VALUE = FUN.VALUE)
+}
+
+vcapply <- function(..., FUN.VALUE = character(1L)) {
+  vapply(..., FUN.VALUE = FUN.VALUE)
+}
+
+
 #' Capture regex groups
 #'
 #' Captures regex groups and returns a named matrix of groups with one column

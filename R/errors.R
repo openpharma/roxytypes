@@ -19,9 +19,7 @@ errors <- list(
   },
 
   # A tag was unable to be parsed because of a roxygen2 comment syntax error
-  parse_syntax = paste0(
-    "Failed to parse @typed tag. Tag should be of the form:\n\n",
-    "    #' @typed <param>: <type>\n",
-    "    #'   <description>\n\n"
-  )
+  parse_syntax = function(tag) {
+    sprintf("Failed to parse @%s tag. See ?roxytypes::tags for syntax.", tag)
+  }
 )

@@ -33,6 +33,9 @@ CONFIG <- paste0(".", utils::packageName(), "_config")  # nolint
 #' @describeIn config
 #' Load the contents of a config into an environment
 #'
+#' @typedreturn environment
+#'   The namespace-internal configuration state.
+#'
 #' @keywords internal
 config_load <- function() {
   if (exists(CONFIG, envir = .state)) return(.state[[CONFIG]])
@@ -45,7 +48,7 @@ config_load <- function() {
 #' Load a configuration from a path
 #'
 #' @keywords internal
-config_find_from <- function(path) {
+config_find_from <- function(path = ".") {
   repeat {
     if (file.exists(file.path(path, "DESCRIPTION"))) break
     if (dirname(path) == path) return(list())
@@ -66,7 +69,7 @@ config_find_from <- function(path) {
 #' Load a configuration from a DESCRIPTION file
 #'
 #' @keywords internal
-config_from_desc <- function(path) {
+config_from_desc <- function(path = ".") {
   path <- file.path(path, "DESCRIPTION")
 
   field <- paste0("Config/", packageName())
@@ -87,7 +90,7 @@ config_from_desc <- function(path) {
 #'
 #' @importFrom utils packageName
 #' @keywords internal
-config_from_file <- function(path) {
+config_from_file <- function(path = ".") {
   pattern <- "^meta\\.[rR]"
 
   path <- file.path(path, "man", utils::packageName())

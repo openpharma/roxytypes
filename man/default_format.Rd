@@ -4,12 +4,12 @@
 \alias{default_format}
 \title{Default formatter for \verb{@typed}}
 \usage{
-default_format(x, name, type, description, ...)
+default_format(x, name, type, default = NULL, description, ...)
 }
 \arguments{
-\item{x}{[`[roxygen2::roxy_tag()]`] The tag to format.}
+\item{x}{([roxygen2::roxy_tag()]) The tag to format.}
 
-\item{name, type, description}{[`character(1)`] Fields parsed from the `@typed` tag.}
+\item{name, type, default, description}{(`character(1)`; Default = `NULL`) Fields parsed from the `@typed` tag.}
 
 \item{...}{Additional arguments unused.}
 }
@@ -19,3 +19,4 @@ A formatted character value.
 \description{
 Adds special cases for when the type uses other roxygen2 syntax
 }
+\keyword{internal}
