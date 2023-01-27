@@ -16,10 +16,13 @@
     <loc>/index.html</loc>
   </url>
   <url>
-    <loc>/reference/config.html</loc>
+    <loc>/reference/associated_block.html</loc>
   </url>
   <url>
     <loc>/reference/default_format.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_param_default.html</loc>
   </url>
   <url>
     <loc>/reference/if-not-null-else.html</loc>
@@ -34,9 +37,27 @@
     <loc>/reference/roxy_tag_parse.roxy_tag_typed.html</loc>
   </url>
   <url>
+    <loc>/reference/roxy_tag_parse.roxy_tag_typedreturn.html</loc>
+  </url>
+  <url>
     <loc>/reference/roxy_tag_rd.roxy_tag_typed.html</loc>
   </url>
   <url>
+    <loc>/reference/roxy_tag_rd.roxy_tag_typedreturn.html</loc>
+  </url>
+  <url>
+    <loc>/reference/roxygen_blocks.html</loc>
+  </url>
+  <url>
+    <loc>/reference/tags.html</loc>
+  </url>
+  <url>
     <loc>/reference/try_parse_typed.html</loc>
+  </url>
+  <url>
+    <loc>/reference/try_parse_typedreturn.html</loc>
+  </url>
+  <url>
+    <loc>/reference/typedreturn.html</loc>
   </url>
 </urlset>
