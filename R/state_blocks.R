@@ -3,10 +3,17 @@
 #' Avoid recomputing `roxygen2`s parsing by saving the blocks after the first
 #' tag is hit.
 #'
+#' @importFrom cli cli_alert_info
 #' @keywords internal
 roxygen_blocks <- function() {
   x <- "roxygen_blocks"
   if (exists(x, .state)) return(.state[[x]])
+
+  config <- config()
+  if (isTRUE(config$verbose)) {
+    cli::cli_alert_info("Loading {.pkg roxytypes} namespace cache")
+  }
+
   .state[[x]] <- suppressWarnings(roxygen2::parse_package(env = topenv()))
 }
 

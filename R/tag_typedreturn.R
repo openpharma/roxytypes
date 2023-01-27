@@ -49,7 +49,7 @@ roxy_tag_parse.roxy_tag_typedreturn <- function(x) {  # nolint
 #' @importFrom roxygen2 roxy_tag_rd
 #' @exportS3Method
 roxy_tag_rd.roxy_tag_typedreturn <- function(x, base_path, env) {  # nolint
-  config <- config_load()
+  config <- config()
   format <- config$format %||% default_format
 
   desc <- if (is.function(format)) {

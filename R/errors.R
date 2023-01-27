@@ -20,6 +20,11 @@ errors <- list(
 
   # A tag was unable to be parsed because of a roxygen2 comment syntax error
   parse_syntax = function(tag) {
-    sprintf("Failed to parse @%s tag. See ?roxytypes::tags for syntax.", tag)
+    "failed to parse. See ?roxytypes::tags for syntax."
+  },
+
+  # A default was set, but was not documented
+  default_undocumented = function(tag) {
+    "missing @default field. See ?roxytypes::tags for syntax."
   }
 )

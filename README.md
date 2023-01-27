@@ -17,6 +17,13 @@ The `@typed` tag expects input in the form:
 #'   <description>
 ```
 
+or
+
+```
+#' @typed <var>: <type> @default <default>
+#'   <description>
+```
+
 The newline after the `type` field is a meaningful delimiter to avoid having to
 disambiguate between type annotations and written descriptions. In practice it
 looks something like this:
@@ -26,6 +33,9 @@ looks something like this:
 #'
 #' @typed who: character
 #'   Who you'd like to say hello to.
+#'
+#' @typedreturn: NULL
+#'   `cat` output returned.
 #'
 hello <- function(who = "World") {
   cat("Hello, ", who, "!\n", sep = "")
@@ -45,7 +55,12 @@ Roxygen:
 
 With all of that set up, the only thing left is to rebuild your docs!
 
-## Configuring Formatting
+## Configuration
+
+`roxytypes` accepts a number of configuration fields. For defaults, see
+`?config`.
+
+### Formatting
 
 The style of documentation can be configured using `Config/roxytypes`:
 
@@ -55,8 +70,23 @@ Config/roxytypes: list(format = "(`{type}`): {description}")
 ```
 
 The format string uses `glue` and can be expected to have fields `name`, `type`
-and `description`. The parameter name will always be the named argument value,
-but may be reused for parts of the description.
+`default` and `description`. The parameter name will always be the named 
+argument value, but may be reused for parts of the description.
+
+Altenatively, you can provide a function that accepts the parsed `roxygen2` tag
+and the fields as named arguments.
+
+### Defaults
+
+`roxytypes` can also discover default values if you'd like to include them in
+your documentation. Defaults that are length-1 atomic values (or `NULL`) can be
+picked up automatically, while more complicated defaults need to be annotated
+directly.
+
+Use options `default$derive` to enable derived default documentation,
+`default$missing` to configure how undefined defaults are communicated and
+`default$warn_undocumented` to enable warnings when parameters with defaults are
+left undocumented.
 
 ## [`roxylint`](https://github.com/dgkf/roxylint) compatible
 

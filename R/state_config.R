@@ -1,31 +1,3 @@
-#' `roxytypes` Config
-#'
-#' `roxytypes` exposes a few configuration options for helping to fine-tune your
-#' documentation. These are stored as key-values in a `list` in either the
-#' `Config/roxytypes` field of your `DESCRIPTION` file, or in a
-#' `./man/roxytypes/meta.R` file within your package.
-#'
-#' The available settings are listed below. Some fields are nested, which are
-#' shown by concatenating nested keys using `$`.
-#'
-#'  * `format`: An optional `glue`-style string, which can assume values for
-#'    `name`, `type`, `default` and `description`. See `?roxytypes::tags` for
-#'    details on the source of each of these strings.
-#'
-#'  * `defaults$derive`: Whether to try to derive default values for
-#'    documentation. When a function's formal arguments are length-1 atomic
-#'    values (or `NULL`), they can be derived for your documentation.
-#'
-#'  * `defaults$missing`: Either `NULL` or a character value. If a character
-#'    value is provided, it is used in documentation as the default value when
-#'    no default is defined. If `NULL`, missing default values are not included
-#'    in documentation.
-#'
-#' @name config
-NULL
-
-
-
 #' Configuration
 #'
 #' Various functions for loading, caching and performing configured behaviors
@@ -58,16 +30,48 @@ NULL
 CONFIG <- paste0(".", utils::packageName(), "_config")  # nolint
 
 
-#' @describeIn config_helpers
-#' Load the contents of a config into an environment
+#' `roxytypes` Config
 #'
-#' @typedreturn environment
-#'   The namespace-internal configuration state.
+#' `roxytypes` exposes a few configuration options for helping to fine-tune your
+#' documentation. These are stored as key-values in a `list` in either the
+#' `Config/roxytypes` field of your `DESCRIPTION` file, or in a
+#' `./man/roxytypes/meta.R` file within your package.
 #'
+#' The available settings are listed below. Some fields are nested, which are
+#' shown by concatenating nested keys using `$`.
+#'
+#'  * `format`: An optional `glue`-style string, which can assume values for
+#'    `name`, `type`, `default` and `description`. See `?roxytypes::tags` for
+#'    details on the source of each of these strings.
+#'
+#'  * `defaults$derive`: Whether to try to derive default values for
+#'    documentation. When a function's formal arguments are length-1 atomic
+#'    values (or `NULL`), they can be derived for your documentation.
+#'
+#'  * `defaults$missing`: Either `NULL` or a character value. If a character
+#'    value is provided, it is used in documentation as the default value when
+#'    no default is defined. If `NULL`, missing default values are not included
+#'    in documentation.
+#'
+#'  * `defaults$warn_undocumented`: If `TRUE`, alerts are raised if defaults are
+#'    defined, but not documented.
+#'
+#'  * `verbose`: If `TRUE`, emit extra diagnostic alerts while processing the
+#'    package.
+#'
+#' @typedreturn list
+#'   A named list of configured behaviors.
+#'
+#' @importFrom cli cli_alert_info
 #' @keywords internal
-config_load <- function() {
+config <- function() {
   if (exists(CONFIG, envir = .state)) return(.state[[CONFIG]])
   config <- config_find_from(getwd())
+
+  if (isTRUE(config$verbose)) {
+    cli::cli_alert_info("Loading {.pkg roxytypes} config")
+  }
+
   .state[[CONFIG]] <- config
 }
 
