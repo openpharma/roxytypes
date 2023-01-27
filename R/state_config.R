@@ -1,18 +1,39 @@
-#' Environment value name to use for storing config
+#' `roxytypes` Config
 #'
-#' This constant is used as a variable name in the package environment while
-#' documentation is being built to avoid constantly parsing configurations
-#' during evaluation of each tag.
+#' `roxytypes` exposes a few configuration options for helping to fine-tune your
+#' documentation. These are stored as key-values in a `list` in either the
+#' `Config/roxytypes` field of your `DESCRIPTION` file, or in a
+#' `./man/roxytypes/meta.R` file within your package.
 #'
-#' @importFrom utils packageName
-#' @noRd
-CONFIG <- paste0(".", utils::packageName(), "_config")  # nolint
+#' The available settings are listed below. Some fields are nested, which are
+#' shown by concatenating nested keys using `$`.
+#'
+#'  * `format`: An optional `glue`-style string, which can assume values for
+#'    `name`, `type`, `default` and `description`. See `?roxytypes::tags` for
+#'    details on the source of each of these strings.
+#'
+#'  * `defaults$derive`: Whether to try to derive default values for
+#'    documentation. When a function's formal arguments are length-1 atomic
+#'    values (or `NULL`), they can be derived for your documentation.
+#'
+#'  * `defaults$missing`: Either `NULL` or a character value. If a character
+#'    value is provided, it is used in documentation as the default value when
+#'    no default is defined. If `NULL`, missing default values are not included
+#'    in documentation.
+#'
+#' @name config
+NULL
+
 
 
 #' Configuration
 #'
 #' Various functions for loading, caching and performing configured behaviors
 #' using a user-supplied configuration file.
+#'
+#' This constant is used as a variable name in the package environment while
+#' documentation is being built to avoid constantly parsing configurations
+#' during evaluation of each tag.
 #'
 #' @typed x: roxy_tag
 #'   An internal, intermediate `roxygen2` tag object upon which to evaluate
@@ -26,11 +47,18 @@ CONFIG <- paste0(".", utils::packageName(), "_config")  # nolint
 #'   to a `DESCRIPTION` or the root path of a package, depending on the context
 #'   of the function.
 #'
-#' @name config
-.state <- new.env(parent = emptyenv())
+#' @name config_helpers
+NULL
 
 
-#' @describeIn config
+#' A name for storing shared config state
+#'
+#' @importFrom utils packageName
+#' @noRd
+CONFIG <- paste0(".", utils::packageName(), "_config")  # nolint
+
+
+#' @describeIn config_helpers
 #' Load the contents of a config into an environment
 #'
 #' @typedreturn environment
@@ -44,7 +72,7 @@ config_load <- function() {
 }
 
 
-#' @describeIn config
+#' @describeIn config_helpers
 #' Load a configuration from a path
 #'
 #' @keywords internal
@@ -65,7 +93,7 @@ config_find_from <- function(path = ".") {
 }
 
 
-#' @describeIn config
+#' @describeIn config_helpers
 #' Load a configuration from a DESCRIPTION file
 #'
 #' @keywords internal
@@ -85,7 +113,7 @@ config_from_desc <- function(path = ".") {
 }
 
 
-#' @describeIn config
+#' @describeIn config_helpers
 #' Load a configuration from a dotfile
 #'
 #' @importFrom utils packageName
