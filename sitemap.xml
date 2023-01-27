@@ -19,10 +19,16 @@
     <loc>/reference/associated_block.html</loc>
   </url>
   <url>
+    <loc>/reference/config.html</loc>
+  </url>
+  <url>
+    <loc>/reference/config_helpers.html</loc>
+  </url>
+  <url>
     <loc>/reference/default_format.html</loc>
   </url>
   <url>
-    <loc>/reference/get_param_default.html</loc>
+    <loc>/reference/get_parameter_default.html</loc>
   </url>
   <url>
     <loc>/reference/if-not-null-else.html</loc>

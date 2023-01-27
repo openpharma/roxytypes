@@ -64,12 +64,18 @@
 <p>The <code>@typed</code> tag expects input in the form:</p>
 <pre><code><span><span class="co">#' @typed &lt;var&gt;: &lt;type&gt;</span></span>
 <span><span class="co">#'   &lt;description&gt;</span></span></code></pre>
+<p>or</p>
+<pre><code><span><span class="co">#' @typed &lt;var&gt;: &lt;type&gt; @default &lt;default&gt;</span></span>
+<span><span class="co">#'   &lt;description&gt;</span></span></code></pre>
 <p>The newline after the <code>type</code> field is a meaningful delimiter to avoid having to disambiguate between type annotations and written descriptions. In practice it looks something like this:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' Example</span></span>
 <span><span class="co">#'</span></span>
 <span><span class="co">#' @typed who: character</span></span>
 <span><span class="co">#'   Who you'd like to say hello to.</span></span>
+<span><span class="co">#'</span></span>
+<span><span class="co">#' @typedreturn: NULL</span></span>
+<span><span class="co">#'   `cat` output returned.</span></span>
 <span><span class="co">#'</span></span>
 <span><span class="va">hello</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">who</span> <span class="op">=</span> <span class="st">"World"</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Hello, "</span>, <span class="va">who</span>, <span class="st">"!\n"</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span>
@@ -83,12 +89,24 @@
 <p>With all of that set up, the only thing left is to rebuild your docs!</p>
 </div>
 <div class="section level2">
-<h2 id="configuring-formatting">Configuring Formatting<a class="anchor" aria-label="anchor" href="#configuring-formatting"></a>
+<h2 id="configuration">Configuration<a class="anchor" aria-label="anchor" href="#configuration"></a>
 </h2>
+<p><code>roxytypes</code> accepts a number of configuration fields. For defaults, see <code><a href="reference/config.html">?config</a></code>.</p>
+<div class="section level3">
+<h3 id="formatting">Formatting<a class="anchor" aria-label="anchor" href="#formatting"></a>
+</h3>
 <p>The style of documentation can be configured using <code>Config/roxytypes</code>:</p>
 <p><code>DESCRIPTION</code></p>
 <pre><code><span><span class="va">Config</span><span class="op">/</span><span class="va">roxytypes</span><span class="op">:</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>format <span class="op">=</span> <span class="st">"(`{type}`): {description}"</span><span class="op">)</span></span></code></pre>
-<p>The format string uses <code>glue</code> and can be expected to have fields <code>name</code>, <code>type</code> and <code>description</code>. The parameter name will always be the named argument value, but may be reused for parts of the description.</p>
+<p>The format string uses <code>glue</code> and can be expected to have fields <code>name</code>, <code>type</code> <code>default</code> and <code>description</code>. The parameter name will always be the named argument value, but may be reused for parts of the description.</p>
+<p>Altenatively, you can provide a function that accepts the parsed <code>roxygen2</code> tag and the fields as named arguments.</p>
+</div>
+<div class="section level3">
+<h3 id="defaults">Defaults<a class="anchor" aria-label="anchor" href="#defaults"></a>
+</h3>
+<p><code>roxytypes</code> can also discover default values if you’d like to include them in your documentation. Defaults that are length-1 atomic values (or <code>NULL</code>) can be picked up automatically, while more complicated defaults need to be annotated directly.</p>
+<p>Use options <code>default$derive</code> to enable derived default documentation, <code>default$missing</code> to configure how undefined defaults are communicated and <code>default$warn_undocumented</code> to enable warnings when parameters with defaults are left undocumented.</p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="roxylint-compatible">
