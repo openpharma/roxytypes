@@ -52,6 +52,10 @@ roxy_tag_rd.roxy_tag_typedreturn <- function(x, base_path, env) {  # nolint
   config <- config()
   format <- config$format %||% default_format
 
+  # handle markdown-style formatting using roxygen2 internals
+  markdown <- getNamespace("roxygen2")[["markdown"]]
+  x$val$description <- markdown(x$val$description)
+
   desc <- if (is.function(format)) {
     do.call(format, append(list(x), x$val))
   } else {

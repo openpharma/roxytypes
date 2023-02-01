@@ -15,15 +15,15 @@ config_from_file(path = ".")
 }
 \arguments{
 \item{path}{(`character[1]`) A file path to use when searching for a config file. Either the file path
-  to a `DESCRIPTION` or the root path of a package, depending on the context
-  of the function.}
+to a \code{DESCRIPTION} or the root path of a package, depending on the context
+of the function.}
 
-\item{x}{(`roxy_tag`) An internal, intermediate `roxygen2` tag object upon which to evaluate
-  configured behaviors.}
+\item{x}{(`roxy_tag`) An internal, intermediate \code{roxygen2} tag object upon which to evaluate
+configured behaviors.}
 
 \item{config}{(`list(format= )`) A list of configuration parameters.}
 
-\item{e}{(`environment`) A package environment used while running `roxygen2`.}
+\item{e}{(`environment`) A package environment used while running \code{roxygen2}.}
 }
 \description{
 Various functions for loading, caching and performing configured behaviors
