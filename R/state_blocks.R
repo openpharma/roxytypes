@@ -5,16 +5,25 @@
 #'
 #' @importFrom cli cli_alert_info
 #' @keywords internal
-roxygen_blocks <- function() {
-  x <- "roxygen_blocks"
-  if (exists(x, .state)) return(.state[[x]])
+roxygen_blocks <- function(path = getwd(), refresh = FALSE, cache = TRUE) {
+  x <- "roxytypes-blocks"
+  if (!refresh && !is.null(blocks <- roxygen2::roxy_meta_get(x)))
+    return(blocks)
 
   config <- config()
   if (isTRUE(config$verbose)) {
     cli::cli_alert_info("Loading {.pkg roxytypes} namespace cache")
   }
 
-  .state[[x]] <- suppressWarnings(roxygen2::parse_package(env = topenv()))
+  blocks <- suppressMessages(suppressWarnings({
+    roxygen2::parse_package(path = path, env = topenv())
+  }))
+
+  # store roxylint in roxygen2 environment
+  roxy_meta_set <- getNamespace("roxygen2")[["roxy_meta_set"]]
+  if (cache) roxy_meta_set(x, blocks)
+
+  blocks
 }
 
 

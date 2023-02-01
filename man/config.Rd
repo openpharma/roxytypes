@@ -4,7 +4,7 @@
 \alias{config}
 \title{\code{roxytypes} Config}
 \usage{
-config()
+config(path = getwd(), refresh = FALSE, cache = TRUE)
 }
 \value{
 (`list`) A named list of configured behaviors.

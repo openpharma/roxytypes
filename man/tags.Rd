@@ -17,7 +17,7 @@ The \verb{@typed} tag introduces a syntax for defining parameter types as a
 \code{roxygen2} tag.
 }
 \details{
-There are a couple important syntactic features:
+Be aware that there are a few syntactic requirements:
 \itemize{
 \item \code{:} delimiter between the variable name and type.
 \item \verb{\\n} after the type to separate it from the description.

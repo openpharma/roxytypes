@@ -4,7 +4,7 @@
 \alias{roxygen_blocks}
 \title{Fetch \code{roxygen2} blocks}
 \usage{
-roxygen_blocks()
+roxygen_blocks(path = getwd(), refresh = FALSE, cache = TRUE)
 }
 \description{
 Avoid recomputing \code{roxygen2}s parsing by saving the blocks after the first

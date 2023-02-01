@@ -3,7 +3,7 @@
 #' The `@typed` tag introduces a syntax for defining parameter types as a
 #' `roxygen2` tag.
 #'
-#' There are a couple important syntactic features:
+#' Be aware that there are a few syntactic requirements:
 #'
 #'   * `:` delimiter between the variable name and type.
 #'   * `\n` after the type to separate it from the description.
@@ -98,7 +98,7 @@ get_parameter_default <- function(x) {
 
   config <- config()
   missing <- config$defaults$missing
-  warn <- config$defaults$warn_undocumented
+  warn <- isTRUE(config$defaults$warn_undocumented)
 
   block <- associated_block(x$file, x$line)
   fn <- block$object$value

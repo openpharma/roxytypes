@@ -17,6 +17,9 @@ Imports:
     cli,
     glue,
     roxygen2
+Suggests:
+    mockery,
+    testthat
 Enhances:
     roxylint
 Remotes:

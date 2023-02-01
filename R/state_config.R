@@ -64,15 +64,21 @@ CONFIG <- paste0(".", utils::packageName(), "_config")  # nolint
 #'
 #' @importFrom cli cli_alert_info
 #' @keywords internal
-config <- function() {
-  if (exists(CONFIG, envir = .state)) return(.state[[CONFIG]])
-  config <- config_find_from(getwd())
+config <- function(path = getwd(), refresh = FALSE, cache = TRUE) {
+  roxytypes_config <- roxygen2::roxy_meta_get("roxytypes")
+  if (!refresh && !is.null(roxytypes_config))
+    return(roxytypes_config)
 
+  config <- config_find_from(getwd())
   if (isTRUE(config$verbose)) {
-    cli::cli_alert_info("Loading {.pkg roxytypes} config")
+    cli::cli_alert_info("Loading {.pkg {utils::packageName()}} config")
   }
 
-  .state[[CONFIG]] <- config
+  # store roxylint in roxygen2 environment
+  roxy_meta_set <- getNamespace("roxygen2")[["roxy_meta_set"]]
+  if (cache) roxy_meta_set("roxytypes", config)
+
+  config
 }
 
 
