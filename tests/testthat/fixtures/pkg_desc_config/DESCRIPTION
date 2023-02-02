@@ -1,1 +1,2 @@
+Package: pkg.meta.config
 Config/roxytypes: list(verbose = FALSE)
