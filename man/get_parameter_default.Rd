@@ -7,11 +7,11 @@
 get_parameter_default(x)
 }
 \arguments{
-\item{x}{([roxygen2::roxy_tag()]) A tag to use to discover the associated function block and possible
+\item{x}{(\code{\link[roxygen2:roxy_tag]{roxygen2::roxy_tag()}}) A tag to use to discover the associated function block and possible
 parameter defaults.}
 }
 \value{
-(`character[1] | NULL`) Formatted representation of the value if found, falling back to a missing
+(\code{character[1] | NULL}) Formatted representation of the value if found, falling back to a missing
 representation or \code{NULL} if a default value could not be discovered.
 }
 \description{

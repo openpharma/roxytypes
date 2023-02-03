@@ -41,10 +41,11 @@ roxygen_blocks <- function(path = getwd(), refresh = FALSE, cache = TRUE) {
 #'
 #' @keywords internal
 associated_block <- function(file, line) {
+  print(paste0("finding needle: ", deparse(file)))
   for (block in roxygen_blocks()) {
     for (tag in block$tags) {
-      if (tag$line == line && tag$file == file)
-        return(block)
+      print(paste0("haystack: ", deparse(tag$file)))
+      if (tag$line == line && tag$file == file) return(block)
     }
   }
 
