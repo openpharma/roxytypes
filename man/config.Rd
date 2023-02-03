@@ -7,7 +7,7 @@
 config(path = getwd(), refresh = FALSE, cache = TRUE)
 }
 \value{
-(`list`) A named list of configured behaviors.
+(\code{list}) A named list of configured behaviors.
 }
 \description{
 \code{roxytypes} exposes a few configuration options for helping to fine-tune your

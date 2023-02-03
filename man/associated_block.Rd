@@ -7,12 +7,12 @@
 associated_block(file, line)
 }
 \arguments{
-\item{file}{(`character[1]`) A file path associated with a tag}
+\item{file}{(\code{character[1]}) A file path associated with a tag}
 
-\item{line}{(`integer[1]`) A line number in the file where the tag was found}
+\item{line}{(\code{integer[1]}) A line number in the file where the tag was found}
 }
 \value{
-(`[roxygen2::roxy_block()] | NULL`) A \code{roxy_block} if one could be associated, or \code{NULL} if not.
+(\verb{[roxygen2::roxy_block()] | NULL}) A \code{roxy_block} if one could be associated, or \code{NULL} if not.
 }
 \description{
 Given a file and line, discover which block the tag is associated with

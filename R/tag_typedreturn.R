@@ -51,15 +51,16 @@ roxy_tag_parse.roxy_tag_typedreturn <- function(x) {  # nolint
 roxy_tag_rd.roxy_tag_typedreturn <- function(x, base_path, env) {  # nolint
   config <- config()
   format <- config$format %||% default_format
-
-  # handle markdown-style formatting using roxygen2 internals
-  markdown <- getNamespace("roxygen2")[["markdown"]]
-  x$val$description <- markdown(x$val$description)
-
   desc <- if (is.function(format)) {
     do.call(format, append(list(x), x$val))
   } else {
     glue::glue(format, .envir = x$val)
+  }
+
+  # handle markdown-style formatting using roxygen2 internals
+  if (isTRUE(roxygen2::roxy_meta_get("markdown"))) {
+    markdown <- getNamespace("roxygen2")[["markdown"]]
+    desc <- markdown(desc)
   }
 
   roxygen2::rd_section("value", desc)
