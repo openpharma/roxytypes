@@ -15,10 +15,6 @@ test_that("roxygen_blocks can be scraped for topenv namespace", {
 test_that("associated_block can find the block containing a tag", {
   tp <- normalizePath(testthat::test_path())
   f <- normalizePath(file.path(tp, "fix", "pkgDESC", "R", "fn.R"))
-  expect_true(file.exists(f))
-
-  print(roxygen_blocks())
-
   expect_s3_class(associated_block(f, 3), "roxy_block")
   expect_null(associated_block(f, 1e5))
 })
