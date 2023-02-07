@@ -9,7 +9,7 @@ default_format(x, name, type, default = NULL, description, ...)
 \arguments{
 \item{x}{(\code{\link[roxygen2:roxy_tag]{roxygen2::roxy_tag()}}) The tag to format.}
 
-\item{name, type, default, description}{(\code{character(1)}; Default = \code{NULL}) Fields parsed from the \verb{@typed} tag.}
+\item{name, type, default, description}{(\code{character(1)}) Fields parsed from the \verb{@typed} tag.}
 
 \item{...}{Additional arguments unused.}
 }

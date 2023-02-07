@@ -40,3 +40,21 @@ regex_capture <- function(pattern, x, ...) {
 
   match
 }
+
+
+find_package_root <- function(path = ".") {
+  repeat {
+    if (file.exists(file.path(path, "DESCRIPTION"))) return(path)
+    if (dirname(path) == path) break
+    path <- dirname(path)
+  }
+
+  NULL
+}
+
+
+escape_non_glue_re <- function(x) {
+  out <- gsub("([.|()\\^{}+$*?]|\\[|\\])", "\\\\\\1", x)
+  # unescape glue-style whisker words (as opposed to regex {n,n} ranges)
+  gsub("\\\\\\{(\\w+)\\\\\\}", "{\\1}", out)
+}
