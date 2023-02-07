@@ -14,6 +14,11 @@ vcapply <- function(..., FUN.VALUE = character(1L)) {
 }
 
 
+split_and_trim <- function(x) {
+  trimws(strsplit(x, "\n")[[1]])
+}
+
+
 #' Capture regex groups
 #'
 #' Captures regex groups and returns a named matrix of groups with one column
