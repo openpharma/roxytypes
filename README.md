@@ -10,6 +10,32 @@ Typed parameter definition `roxygen2` tag
 
 ## Quick Start
 
+### Convert your package
+
+If you already have a codebase and you'd like to convert it to use `roxytypes`,
+you can use:
+
+```r
+roxytypes::convert()
+```
+
+You'll be prompted with a preview of changes and the option to continue by
+making edits or aborting changes. By default, this assumes that your existing
+parameters descriptions, if they do follow a typed convention, are preceeded by 
+`` (`type`) ``.
+
+If that's not the case, you can specify your own format to use:
+
+```r
+roxytypes::convert("[`{type}`] {description}")
+```
+
+By default, conversions will only happen if an existing type is found using the
+provided type format. If you'd like to convert all possible tags, pass
+`unmatched = TRUE`.
+
+### Tags from scratch 
+
 Use the `@typed` tag to define parameters, replacing the `@param` tag.
 
 The `@typed` tag expects input in the form:
