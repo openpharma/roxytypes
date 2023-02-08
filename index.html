@@ -60,6 +60,21 @@
 <div class="section level2">
 <h2 id="quick-start">Quick Start<a class="anchor" aria-label="anchor" href="#quick-start"></a>
 </h2>
+<div class="section level3">
+<h3 id="convert-your-package">Convert your package<a class="anchor" aria-label="anchor" href="#convert-your-package"></a>
+</h3>
+<p>If you already have a codebase and you’d like to convert it to use <code>roxytypes</code>, you can use:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">roxytypes</span><span class="fu">::</span><span class="fu"><a href="reference/convert.html">convert</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>You’ll be prompted with a preview of changes and the option to continue by making edits or aborting changes. By default, this assumes that your existing parameters descriptions, if they do follow a typed convention, are preceeded by <code>(`type`)</code>.</p>
+<p>If that’s not the case, you can specify your own format to use:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">roxytypes</span><span class="fu">::</span><span class="fu"><a href="reference/convert.html">convert</a></span><span class="op">(</span><span class="st">"[`{type}`] {description}"</span><span class="op">)</span></span></code></pre></div>
+<p>By default, conversions will only happen if an existing type is found using the provided type format. If you’d like to convert all possible tags, pass <code>unmatched = TRUE</code>.</p>
+</div>
+<div class="section level3">
+<h3 id="tags-from-scratch">Tags from scratch<a class="anchor" aria-label="anchor" href="#tags-from-scratch"></a>
+</h3>
 <p>Use the <code>@typed</code> tag to define parameters, replacing the <code>@param</code> tag.</p>
 <p>The <code>@typed</code> tag expects input in the form:</p>
 <pre><code><span><span class="co">#' @typed &lt;var&gt;: &lt;type&gt;</span></span>
@@ -68,7 +83,7 @@
 <pre><code><span><span class="co">#' @typed &lt;var&gt;: &lt;type&gt; @default &lt;default&gt;</span></span>
 <span><span class="co">#'   &lt;description&gt;</span></span></code></pre>
 <p>The newline after the <code>type</code> field is a meaningful delimiter to avoid having to disambiguate between type annotations and written descriptions. In practice it looks something like this:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' Example</span></span>
 <span><span class="co">#'</span></span>
 <span><span class="co">#' @typed who: character</span></span>
@@ -87,6 +102,7 @@
 <span><span class="va">Roxygen</span><span class="op">:</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>markdown <span class="op">=</span> <span class="cn">TRUE</span>, packages <span class="op">=</span> <span class="st">"roxytypes"</span><span class="op">)</span></span></code></pre>
 <p>With all of that set up, the only thing left is to rebuild your docs!</p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="configuration">Configuration<a class="anchor" aria-label="anchor" href="#configuration"></a>
