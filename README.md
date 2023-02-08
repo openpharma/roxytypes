@@ -1,7 +1,9 @@
 # `roxytypes`
 
 <!-- badges: start -->
+[![CRAN](https://img.shields.io/cran/v/roxytypes.svg)](https://cran.r-project.org/package=roxytypes)
 [![R-CMD-check](https://github.com/dgkf/roxytypes/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/dgkf/roxytypes/actions/workflows/R-CMD-check.yaml)
+[![Codecov](https://img.shields.io/codecov/c/github/dgkf/roxytypes/main.svg)](https://app.codecov.io/gh/dgkf/roxytypes)
 <!-- badges: end -->
 
 Typed parameter definition `roxygen2` tag
