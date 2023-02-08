@@ -3,6 +3,7 @@
 #' Avoid recomputing `roxygen2`s parsing by saving the blocks after the first
 #' tag is hit.
 #'
+#' @importFrom roxygen2 parse_package env_package
 #' @importFrom cli cli_alert_info
 #' @keywords internal
 roxygen_blocks <- function(path = getwd(), refresh = FALSE, cache = TRUE) {
@@ -16,7 +17,7 @@ roxygen_blocks <- function(path = getwd(), refresh = FALSE, cache = TRUE) {
   }
 
   blocks <- suppressMessages(suppressWarnings({
-    roxygen2::parse_package(path = path, env = topenv())
+    roxygen2::parse_package(path = path, env = roxygen2::env_package(path))
   }))
 
   # store roxylint in roxygen2 environment
@@ -41,10 +42,8 @@ roxygen_blocks <- function(path = getwd(), refresh = FALSE, cache = TRUE) {
 #'
 #' @keywords internal
 associated_block <- function(file, line) {
-  print(paste0("finding needle: ", deparse(file)))
   for (block in roxygen_blocks()) {
     for (tag in block$tags) {
-      print(paste0("haystack: ", deparse(tag$file)))
       if (tag$line == line && tag$file == file) return(block)
     }
   }

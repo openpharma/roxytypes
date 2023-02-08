@@ -5,12 +5,12 @@
 #'
 #' Be aware that there are a few syntactic requirements:
 #'
-#'   * `:` delimiter between the variable name and type.
-#'   * `\n` after the type to separate it from the description.
-#'   * `@default` tag can be used to optionally specify a default parameter
-#'     value. If not set, and `derive_defaults` is enabled, then atomic,
-#'     length-1 parameter defaults will automatically be used to populate
-#'     default arguments in documentation.
+#'  * `:` delimiter between the variable name and type.
+#'  * `\n` after the type to separate it from the description.
+#'  * `@default` tag can be used to optionally specify a default parameter
+#'    value. If not set, and `derive_defaults` is enabled, then atomic,
+#'    length-1 parameter defaults will automatically be used to populate
+#'    default arguments in documentation.
 #'
 #' @usage
 #' #' @typed <var>: <type>
@@ -153,13 +153,18 @@ get_parameter_default <- function(x) {
 default_format <- function(x, name, type, default = NULL, description, ...) {
   typestr <- type
 
-  # do not wrap roxygen links in code backticks
-  if (!grepl("^\\[.*\\]$", type))
+  # do not wrap code that starts with:
+  #  - "[": roxygen link, eg (`[roxygen2::roxy_tag()]`)
+  #  - "`": already backticked code
+  #  - '"' or "'": quoted strings
+  if (!grepl("^[[`'\"]", type)) {
     typestr <- paste0("`", typestr, "`")
+  }
 
   defaultstr <- ""
-  if (is.character(default) && length(default) > 0 && nchar(default) > 0)
+  if (is.character(default) && length(default) > 0 && nchar(default) > 0) {
     defaultstr <- paste0("; Default = `", default, "`")
+  }
 
   paste0("(", typestr, defaultstr, ") ", description)
 }

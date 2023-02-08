@@ -12,7 +12,7 @@ associated_block(file, line)
 \item{line}{(\code{integer[1]}) A line number in the file where the tag was found}
 }
 \value{
-(\verb{[roxygen2::roxy_block()] | NULL}) A \code{roxy_block} if one could be associated, or \code{NULL} if not.
+(\code{\link[roxygen2:roxy_block]{roxygen2::roxy_block()}} | NULL) A \code{roxy_block} if one could be associated, or \code{NULL} if not.
 }
 \description{
 Given a file and line, discover which block the tag is associated with

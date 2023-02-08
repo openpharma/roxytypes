@@ -87,11 +87,8 @@ config <- function(path = getwd(), refresh = FALSE, cache = TRUE) {
 #'
 #' @keywords internal
 config_find_from <- function(path = ".") {
-  repeat {
-    if (file.exists(file.path(path, "DESCRIPTION"))) break
-    if (dirname(path) == path) return(list())
-    path <- dirname(path)
-  }
+  path <- find_package_root(path)
+  if (is.null(path)) return(list())
 
   config_desc <- config_from_desc(path)
   config_file <- config_from_file(path)

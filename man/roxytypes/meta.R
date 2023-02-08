@@ -1,7 +1,7 @@
 list(
   defaults = list(
-    derive = TRUE,
-    warn_undocumented = TRUE,
+    derive = FALSE,
+    warn_undocumented = FALSE,
     missing = NULL
   )
 )
