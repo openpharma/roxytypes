@@ -19,6 +19,12 @@
     <loc>/reference/associated_block.html</loc>
   </url>
   <url>
+    <loc>/reference/build_convert_edits.html</loc>
+  </url>
+  <url>
+    <loc>/reference/build_format_regex.html</loc>
+  </url>
+  <url>
     <loc>/reference/clear_state.html</loc>
   </url>
   <url>
@@ -28,7 +34,25 @@
     <loc>/reference/config_helpers.html</loc>
   </url>
   <url>
+    <loc>/reference/convert.html</loc>
+  </url>
+  <url>
+    <loc>/reference/convert_config_helpers.html</loc>
+  </url>
+  <url>
+    <loc>/reference/convert_helpers.html</loc>
+  </url>
+  <url>
+    <loc>/reference/convert_match_format.html</loc>
+  </url>
+  <url>
+    <loc>/reference/convert_tag.html</loc>
+  </url>
+  <url>
     <loc>/reference/default_format.html</loc>
+  </url>
+  <url>
+    <loc>/reference/find_package_root.html</loc>
   </url>
   <url>
     <loc>/reference/get_parameter_default.html</loc>
@@ -38,6 +62,12 @@
   </url>
   <url>
     <loc>/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>/reference/make_convert_edits.html</loc>
+  </url>
+  <url>
+    <loc>/reference/read_dcf_asis.html</loc>
   </url>
   <url>
     <loc>/reference/regex_capture.html</loc>
@@ -58,6 +88,12 @@
     <loc>/reference/roxygen_blocks.html</loc>
   </url>
   <url>
+    <loc>/reference/split_and_trim.html</loc>
+  </url>
+  <url>
+    <loc>/reference/tag_edit.html</loc>
+  </url>
+  <url>
     <loc>/reference/tags.html</loc>
   </url>
   <url>
@@ -68,5 +104,8 @@
   </url>
   <url>
     <loc>/reference/typedreturn.html</loc>
+  </url>
+  <url>
+    <loc>/reference/vapply_helpers.html</loc>
   </url>
 </urlset>
