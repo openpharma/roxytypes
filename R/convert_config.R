@@ -16,19 +16,34 @@ NULL
 #' Make edits to various configuration files
 #'
 make_config_edits <- function(path) {
-  root <- find_package_root(path)
-  dcf_path <- file.path(root, "DESCRIPTION")
+  modified <- character()
 
+  root <- find_package_root(path)
+  meta_path <- file.path(root, "man", "roxygen", "meta.R")
+  roxygen_uses_meta <- file.exists(meta_path)
+
+  dcf_path <- file.path(root, "DESCRIPTION")
   dcf <- read.dcf(dcf_path, keep.white = TRUE, all = TRUE)
   dcf_orig <- read.dcf(dcf_path, keep.white = colnames(dcf), all = TRUE)
-  dcf_edit <- dcf_orig
+  dcf <- dcf_orig
 
-  dcf_edit <- update_config_needs(dcf_edit)
-  dcf_edit <- update_config_roxygen(dcf_edit, root)
+  # update description "Config/Needs" section
+  dcf <- update_config_needs(dcf)
 
-  if (!identical(dcf_orig, dcf_edit)) {
-    write.dcf(dcf_edit, dcf_path, keep.white = colnames(dcf))
+  # update "Roxygen" section (or meta.R file)
+  if (roxygen_uses_meta) {
+    update_config_roxygen_meta(meta_path)
+    modified <- append(modified, meta_path)
+  } else {
+    dcf <- update_config_roxygen_desc(dcf)
   }
+
+  if (!identical(dcf_orig, dcf)) {
+    write.dcf(dcf, dcf_path, keep.white = colnames(dcf))
+    modified <- append(modified, "DESCRIPTION")
+  }
+
+  modified
 }
 
 
@@ -53,22 +68,6 @@ update_config_needs <- function(dcf) {
 
   if (!grepl(utils::packageName(), dcf[, col]))
     dcf[, col] = paste0(dcf[, col], "\n", strrep(" ", n), utils::packageName())
-
-  dcf
-}
-
-#' @describeIn convert_config_helpers
-#' Update the Roxygen config
-#'
-update_config_roxygen <- function(dcf, root) {
-  meta_path <- file.path(root, "man", "roxygen", "meta.R")
-  roxygen_uses_meta <- file.exists(meta_path)
-
-  if (roxygen_uses_meta) {
-    update_config_roxygen_meta(meta_path)
-  } else {
-    dcf <- update_config_roxygen_desc(dcf)
-  }
 
   dcf
 }
@@ -100,6 +99,7 @@ update_config_roxygen_desc <- function(dcf) {
   if (is.null(expr)) return(dcf)
 
   dcf[, col] <- deparse(expr)
+  dcf
 }
 
 

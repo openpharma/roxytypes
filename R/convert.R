@@ -56,13 +56,8 @@ convert <- function(format, ..., unmatched = FALSE, path = ".",
   tags <- tags[!is_ellipsis]
   edits <- build_convert_edits(format, tags, unmatched = unmatched)
 
-  if (nrow(edits) < 1) {
-    if (verbose) cli::cli_alert_success("no edits required!")
-    return(invisible(NULL))
-  }
-
   n <- 3
-  if (verbose) repeat {
+  if (nrow(edits) > 0 && verbose) repeat {
     preview_convert_edits(edits, n = n)
     continue <- convert_continue_prompt()
     if (is.numeric(continue)) n <- continue
@@ -70,11 +65,11 @@ convert <- function(format, ..., unmatched = FALSE, path = ".",
     else if (isTRUE(continue)) break  # continue with edits
   }
 
-  make_convert_edits(edits)
-  if (verbose) cli::cli_alert_success("tags converted")
+  n_edits <- make_convert_edits(edits)
+  if (verbose) cli::cli_alert_success("{.val {n_edits}} tags converted")
 
-  make_config_edits(path)
-  if (verbose) cli::cli_alert_success("config updated")
+  file_edits <- make_config_edits(path)
+  if (verbose) cli::cli_alert_success("{.file {file_edits}} updated")
 
   invisible(NULL)
 }
@@ -173,4 +168,6 @@ make_convert_edits <- function(edits) {
 
     writeLines(text, file)
   }
+
+  nrow(edits)
 }
