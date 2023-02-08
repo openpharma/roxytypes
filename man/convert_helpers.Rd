@@ -2,16 +2,34 @@
 % Please edit documentation in R/convert_cli.R
 \name{convert_helpers}
 \alias{convert_helpers}
+\alias{convert_continue_prompt}
 \alias{preview_convert_edits}
 \alias{preview_convert_edit}
+\alias{format_diff_chr}
+\alias{diff_lines}
 \title{Conversion Helpers}
 \usage{
+convert_continue_prompt()
+
 preview_convert_edits(edits, n = 1)
 
 preview_convert_edit(edit)
+
+format_diff_chr(d, offset)
+
+diff_lines(d)
 }
 \arguments{
 \item{n}{The number of tags to preview}
+
+\item{edit, edits}{(\code{data.frame}) As produced by \code{convert_edit_df}. Contains the edit source file, starting
+line number, number of original lines modified, the new content to insert
+and whether the format was matched for the edit. When singular, the
+\code{data.frame} is a single row.}
+
+\item{d}{(\code{\link[cli:diff_chr]{cli::diff_chr()}} result) The diff of the original and new tag contents.}
+
+\item{offset}{(\code{integer[1]}) A line offset for the start of the diff.}
 
 \item{format}{(\code{string}) A regular expression to use to match existing param definitions.}
 
@@ -31,8 +49,15 @@ Various functions for supporting conversion from standard roxygen tags to
 }
 \section{Functions}{
 \itemize{
+\item \code{convert_continue_prompt()}: Show a dialog to ask the user how they would like to proceed
+
 \item \code{preview_convert_edits()}: Preview diffs after applying conversion rules
 
 \item \code{preview_convert_edit()}: Preview diffs after applying conversion rules
 
+\item \code{format_diff_chr()}: Format a diff object for cli display
+
+\item \code{diff_lines()}: Build a data.frame of old and new line numbers for a diff
+
 }}
+\keyword{internal}

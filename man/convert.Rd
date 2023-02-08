@@ -39,9 +39,6 @@ components of a parameter definition. They are combined with the literal
 content of \code{format} to produce a regular expression to split existing
 definitions.
 
-For alternative styles, use existing helpers provided by
-\link{regex_helpers}.
-
 For comprehensive control, pass \code{format_re} directly, bypassing expression
 construction altogether.
 }

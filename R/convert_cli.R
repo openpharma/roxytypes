@@ -13,32 +13,50 @@
 #'   should be converted anyways. In such cases, their entire description is
 #'   migrated to a new `@typed` description and the new `@typed` tag's type is
 #'   left blank.
+#' @typed edit,edits: data.frame
+#'   As produced by `convert_edit_df`. Contains the edit source file, starting
+#'   line number, number of original lines modified, the new content to insert
+#'   and whether the format was matched for the edit. When singular, the
+#'   `data.frame` is a single row.
+#' @typed n: integer[1]
+#'   A number of edits to display.
+#' @typed d: [cli::diff_chr()] result
+#'   The diff of the original and new tag contents.
+#' @typed offset: integer[1]
+#'   A line offset for the start of the diff.
 #'
 #' @name convert_helpers
+#' @keywords internal
 NULL
 
 
+#' @describeIn convert_helpers
+#' Show a dialog to ask the user how they would like to proceed
+#'
 convert_continue_prompt <- function() {
   cli::cli({
-    cli::cli_text("How would you like to proceed?")
+    cli::cli_text("Continue to modifying files with edits?")
     cli::cli_text()
 
-    cli::cli_ol()
-    cli::cli_li("Preview a few more [default]")
-    cli::cli_li("Abort")
-    cli::cli_li("Continue")
-    cli::cli_end()
+    cli::cli_dl(c(
+      "  y" = "Yes",
+      "  n" = "No",
+      "  #" = "Preview a few more (default 3)"
+    ))
 
     cli::cli_text()
   })
 
   res <- readline("Selection: ")
 
+  if (!nchar(res)) return(3)
+  if (!is.na(i <- strtoi(res))) return(i)
+
   switch(
     tolower(res),
-    "y" = , "3" = return(TRUE),
-    "n" = , "q" = , "2" = return(FALSE),
-    return(NA)
+    "y" = return(TRUE),
+    "n" = , "q" = return(FALSE),
+    NULL
   )
 }
 
@@ -52,12 +70,12 @@ convert_continue_prompt <- function() {
 #' @return `NULL`
 #'
 preview_convert_edits <- function(edits, n = 1) {
-  i <- sample(seq_len(nrow(edits)), size = min(nrow(edits), n))
+  rows <- sample(seq_len(nrow(edits)), size = min(nrow(edits), n))
 
   cli::cli({
     cli::cli_text("{.emph Examples} ({min(n, nrow(edits))} of {nrow(edits)})\n")
-    for (i in seq_len(nrow(edits))) {
-      preview_convert_edit(edits[i, ])
+    for (row in rows) {
+      preview_convert_edit(edits[row, ])
       cli::cli_text()
     }
   })
@@ -68,18 +86,16 @@ preview_convert_edits <- function(edits, n = 1) {
 #' Preview diffs after applying conversion rules
 #'
 preview_convert_edit <- function(edit) {
-  skip <- edit$line - 1
   raw <- scan(
     edit$file,
     what = character(),
     sep = "\n",
-    skip = skip,
+    skip = edit$line - 1,
     n = edit$n,
     quiet = TRUE
   )
 
   # perform diff and calculate new line offsets
-  after <- edit$line - 1
   tag_diff <- cli::diff_chr(raw, edit$new[[1]])
 
   # print diff with header
@@ -89,6 +105,10 @@ preview_convert_edit <- function(edit) {
   })
 }
 
+
+#' @describeIn convert_helpers
+#' Format a diff object for cli display
+#'
 format_diff_chr <- function(d, offset) {
   d_str <- suppressWarnings(format(d)[-1])  # suppress arg partial match
   lines_df <- diff_lines(d)
@@ -116,7 +136,7 @@ format_diff_chr <- function(d, offset) {
   # format terminal overflow to truncate with ellipsis
   ellipsis <- "\u2026"
   cli_nchar <- cli::ansi_nchar(d_str) + 2 * nchar_lines + 1
-  over <- cli_nchar > (w <- getOption("width", 80))
+  over <- cli_nchar > (w <- cli::console_width())
   if (any(over)) {
     d_str[over] <- paste0(
       cli::ansi_substring(d_str[over], 1, w - 2 * nchar_lines - 2),
@@ -127,6 +147,10 @@ format_diff_chr <- function(d, offset) {
   vcapply(seq_along(d_str), function(i) paste0(lines_str[[i]], d_str[[i]]))
 }
 
+
+#' @describeIn convert_helpers
+#' Build a data.frame of old and new line numbers for a diff
+#'
 diff_lines <- function(d) {
   df <- do.call(rbind, lapply(seq_len(nrow(d$lcs)), function(r) {
     with(d$lcs[r, ], {

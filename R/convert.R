@@ -10,9 +10,6 @@
 #' content of `format` to produce a regular expression to split existing
 #' definitions.
 #'
-#' For alternative styles, use existing helpers provided by
-#' [roxytypes::regex_helpers].
-#'
 #' For comprehensive control, pass `format_re` directly, bypassing expression
 #' construction altogether.
 #'
@@ -49,7 +46,7 @@ convert <- function(format, ..., unmatched = FALSE, path = ".",
   format <- build_format_regex(format, ...)
 
   # build index of all package roxygen tags
-  blocks <- roxygen_blocks(refresh = TRUE, cache = FALSE)
+  blocks <- roxygen_blocks(path = path, refresh = TRUE, cache = FALSE)
   tags <- unlist(lapply(blocks, `[[`, "tags"), recursive = FALSE)
 
   # filter ellipsis, they are not converted
@@ -59,15 +56,27 @@ convert <- function(format, ..., unmatched = FALSE, path = ".",
   tags <- tags[!is_ellipsis]
   edits <- build_convert_edits(format, tags, unmatched = unmatched)
 
+  if (nrow(edits) < 1) {
+    if (verbose) cli::cli_alert_success("no edits required!")
+    return(invisible(NULL))
+  }
+
+  n <- 3
   if (verbose) repeat {
-    preview_convert_edits(edits, n = 3)
+    preview_convert_edits(edits, n = n)
     continue <- convert_continue_prompt()
-    if (isTRUE(!continue)) return(invisible(NULL))  # abort
-    if (isTRUE(continue)) break  # continue with edits
+    if (is.numeric(continue)) n <- continue
+    else if (isTRUE(!continue)) return(invisible(NULL))  # abort
+    else if (isTRUE(continue)) break  # continue with edits
   }
 
   make_convert_edits(edits)
+  if (verbose) cli::cli_alert_success("tags converted")
+
   make_config_edits(path)
+  if (verbose) cli::cli_alert_success("config updated")
+
+  invisible(NULL)
 }
 
 
@@ -125,31 +134,6 @@ convert_edit_df <- function(tag, new, matched) {
 
   edit$new <- list(new)
   edit
-}
-
-
-build_format_regex <- function(format, format_re, ...,
-  type = re_backticked(), description = re_any()) {
-
-  keywords <- list(..., type = type, description = description)
-  keywords <- mapply(
-    function(k, v) glue::glue("(?<{k}>{v})"),
-    names(keywords),
-    keywords,
-    SIMPLIFY = FALSE
-  )
-
-  if (!missing(format)) {
-    format_re <- escape_non_glue_re(format)
-  }
-
-  if (!missing(format_re)) {
-    format_re <- glue::glue(format_re, .envir = as.list(keywords))
-  } else {
-    format_re <- "(?<description>.*)"
-  }
-
-  paste0("(?s)^", format_re, "$")
 }
 
 

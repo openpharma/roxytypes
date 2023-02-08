@@ -5,15 +5,41 @@
 `%||%` <- function(lhs, rhs) if (is.null(lhs)) rhs else lhs
 
 
+#' vapply helpers
+#'
+#' @param ... Passed to [vapply()].
+#' @param FUN.VALUE A prototype signature to use for [vapply()].
+#'
+#' @name vapply_helpers
+#' @keywords internal
+NULL
+
+
+#' @describeIn vapply_helpers
+#' Logical vapply
+#'
 vlapply <- function(..., FUN.VALUE = logical(1L)) {
   vapply(..., FUN.VALUE = FUN.VALUE)
 }
 
+
+#' @describeIn vapply_helpers
+#' Character vapply
+#'
 vcapply <- function(..., FUN.VALUE = character(1L)) {
   vapply(..., FUN.VALUE = FUN.VALUE)
 }
 
 
+#' Split and trim a string
+#'
+#' @typed x: character[1]
+#'   A string to split into lines and trim.
+#'
+#' @typedreturn x: character
+#'   A character vector of trimed lines.
+#'
+#' @keywords internal
 split_and_trim <- function(x) {
   trimws(strsplit(x, "\n")[[1]])
 }
@@ -47,6 +73,17 @@ regex_capture <- function(pattern, x, ...) {
 }
 
 
+#' Find package root directory
+#'
+#' Traces parent directories until we find a pacakge root
+#'
+#' @typed path: character[1]
+#'   A file path within a package.
+#'
+#' @typedreturn character[1]
+#'   The file path to the package root directory.
+#'
+#' @keywords internal
 find_package_root <- function(path = ".") {
   repeat {
     if (file.exists(file.path(path, "DESCRIPTION"))) return(path)
@@ -55,11 +92,4 @@ find_package_root <- function(path = ".") {
   }
 
   NULL
-}
-
-
-escape_non_glue_re <- function(x) {
-  out <- gsub("([.|()\\^{}+$*?]|\\[|\\])", "\\\\\\1", x)
-  # unescape glue-style whisker words (as opposed to regex {n,n} ranges)
-  gsub("\\\\\\{(\\w+)\\\\\\}", "{\\1}", out)
 }
