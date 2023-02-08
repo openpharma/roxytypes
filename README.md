@@ -20,11 +20,12 @@ roxytypes::convert()
 ```
 
 You'll be prompted with a preview of changes and the option to continue by
-making edits or aborting changes. By default, this assumes that your existing
-parameters descriptions, if they do follow a typed convention, are preceeded by 
-`` (`type`) ``.
+making edits or aborting changes. By default, will look for type signatures as
+parenthesized inline code at the start of your descriptions. That is, that
+descriptions are written like `` (`type`) description ``.
 
-If that's not the case, you can specify your own format to use:
+If that's not the case, you can specify your own format. For example, if your
+types were in square brackets, you could specify a format like:
 
 ```r
 roxytypes::convert("[`{type}`] {description}")
@@ -32,7 +33,8 @@ roxytypes::convert("[`{type}`] {description}")
 
 By default, conversions will only happen if an existing type is found using the
 provided type format. If you'd like to convert all possible tags, pass
-`unmatched = TRUE`.
+`unmatched = TRUE`. However new typed tags will only be partially populated and
+will produce documentation notes until they are filled in.
 
 ### Tags from scratch 
 
