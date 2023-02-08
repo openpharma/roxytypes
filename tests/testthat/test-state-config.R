@@ -1,6 +1,6 @@
 test_that("config can be loaded from a DESCRIPTION file", {
   expect_silent(clear_state())
-  p <- file.path(testthat::test_path(), "fix", "pkgDESC")
+  p <- file.path(testthat::test_path(), "fix", "pkg_config_desc")
   mockery::stub(config, "getwd", p)
   expect_identical(as.list(config()), list(verbose = FALSE))
 })
@@ -17,7 +17,7 @@ test_that("config cache is cleared with global state", {
 })
 
 test_that("config can be loaded from a man/roxytypes/meta.R file", {
-  p <- file.path(testthat::test_path(), "fix", "pkgMeta")
+  p <- file.path(testthat::test_path(), "fix", "pkg_config_meta")
   mockery::stub(config, "getwd", p)
   expect_identical(as.list(config()), list(format = "f", verbose = TRUE))
 })

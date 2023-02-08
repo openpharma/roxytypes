@@ -26,11 +26,13 @@ types the next time you re-build your documentation.}
 can be reviewed interactively.}
 }
 \value{
-(\code{NULL}) invisibly.
+(\code{logical[1]}) \code{TRUE} if successfully completes, \code{FALSE} if aborted. Always returns
+invisibly.
 }
 \description{
-For \code{roxygen2} tags with drop-in replacements (namely \verb{@param} and \verb{@return}
-tags), process descriptions and replace tags with \code{roxytypes} equivalents.
+Convert a package codebase into applicable \code{roxytypes} tags. For \code{roxygen2}
+tags with drop-in replacements (namely \verb{@param} and \verb{@return} tags), process
+descriptions and replace tags with \code{roxytypes} equivalents.
 }
 \details{
 A format string is built using \code{\link[=build_format_regex]{build_format_regex()}}, which accepts

@@ -60,6 +60,9 @@ split_and_trim <- function(x) {
 regex_capture <- function(pattern, x, ...) {
   match <- regexpr(pattern, x, ...)
 
+  if (is.null(attr(match, "capture.start")))
+    return(matrix(character()))
+
   starts <- attr(match, "capture.start")
   lengths <- attr(match, "capture.length")
   group_names <- attr(match, "capture.names")
@@ -92,4 +95,19 @@ find_package_root <- function(path = ".") {
   }
 
   NULL
+}
+
+
+#' A helper to reliably read DCF files
+#'
+#' @typed path: character[1]
+#'   A file path to a DESCRIPTION file.
+#'
+#' @typedreturn data.frame
+#'   The result of [read.dcf()].
+#'
+read_dcf_asis <- function(path) {
+  # read once to get all field names
+  tmp <- read.dcf(path, keep.white = TRUE, all = TRUE)
+  read.dcf(path, keep.white = colnames(tmp), all = TRUE)
 }

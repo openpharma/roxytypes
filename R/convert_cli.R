@@ -153,13 +153,13 @@ format_diff_chr <- function(d, offset) {
 #'
 diff_lines <- function(d) {
   df <- do.call(rbind, lapply(seq_len(nrow(d$lcs)), function(r) {
-    with(d$lcs[r, ], {
+    with(d$lcs[r, ], {  # nolint start
       n <- length
       cbind(
         old = if (operation != "insert") rep_len(1, n) else rep_len(NA, n),
         new = if (operation != "delete") rep_len(1, n) else rep_len(NA, n)
       )
-    })
+    })  # nolint end
   }))
 
   df[, "old"] <- ifelse(is.na(df[, "old"]), NA, cumsum(!is.na(df[, "old"])))

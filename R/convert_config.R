@@ -23,17 +23,15 @@ make_config_edits <- function(path) {
   roxygen_uses_meta <- file.exists(meta_path)
 
   dcf_path <- file.path(root, "DESCRIPTION")
-  dcf <- read.dcf(dcf_path, keep.white = TRUE, all = TRUE)
-  dcf_orig <- read.dcf(dcf_path, keep.white = colnames(dcf), all = TRUE)
-  dcf <- dcf_orig
+  dcf <- dcf_orig <- read_dcf_asis(dcf_path)
 
   # update description "Config/Needs" section
   dcf <- update_config_needs(dcf)
 
   # update "Roxygen" section (or meta.R file)
   if (roxygen_uses_meta) {
-    update_config_roxygen_meta(meta_path)
-    modified <- append(modified, meta_path)
+    edited <- update_config_roxygen_meta(meta_path)
+    if (edited) modified <- append(modified, meta_path)
   } else {
     dcf <- update_config_roxygen_desc(dcf)
   }
@@ -52,6 +50,7 @@ make_config_edits <- function(path) {
 #'
 guess_dcf_indent <- function(dcf) {
   newline <- startsWith(as.character(dcf), "\n")
+  if (!any(newline)) return(4)
   min(nchar(gsub("^\n+", "", gsub("\\S.*", "", dcf[, newline]))))
 }
 
@@ -79,9 +78,12 @@ update_config_needs <- function(dcf) {
 update_config_roxygen_meta <- function(path) {
   expr <- try(parse(path)[[1]], silent = TRUE)
   expr <- update_config_roxygen_expr(expr)
-  if (is.null(expr)) return()
+
+  if (is.null(expr))
+    return(FALSE)
 
   writeLines(deparse(expr), path)
+  TRUE
 }
 
 
@@ -131,9 +133,9 @@ update_config_roxygen_expr <- function(expr) {
   } else if (is.atomic(expr$packages)) {
     if (expr$packages != "roxytypes")
       expr$packages <- bquote(c(.(expr$packages), "roxytypes"))
-  } else if (is.call(expr$packages) && expr$packages[[1]] %in% c("c", "list")) {
+  } else if (is.call(expr$packages) && any(expr$packages[[1]] == c("c", "list"))) {
     if (!"roxytypes" %in% eval(expr$packages, envir = baseenv()))
-      expr$packages <- append(expr$packages, "roxytypes")
+      expr$packages[length(expr$packages) + 1] <- "roxytypes"
   } else {
     warning(msg)
     return(NULL)

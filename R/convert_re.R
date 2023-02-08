@@ -66,7 +66,9 @@ build_format_regex <- function(format, format_re, ...,
 #'
 #' @examples
 #' text <- "@param (`test(\")\")`)"
+#'
 #' pattern <- sprintf("`%s`", re_backticked())
+#'
 #' m <- regexec(pattern, text, perl = TRUE)
 #' regmatches(text, m)[[1]]
 #' # [1] "`test(\")\")`"

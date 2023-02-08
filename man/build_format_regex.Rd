@@ -76,7 +76,9 @@ re <- roxytypes:::build_format_regex(
 roxytypes:::regex_capture(re, "aaaa\n\nbb", perl = TRUE)
 
 text <- "@param (`test(\")\")`)"
+
 pattern <- sprintf("`\%s`", re_backticked())
+
 m <- regexec(pattern, text, perl = TRUE)
 regmatches(text, m)[[1]]
 # [1] "`test(\")\")`"

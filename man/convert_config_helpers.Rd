@@ -5,7 +5,6 @@
 \alias{make_config_edits}
 \alias{guess_dcf_indent}
 \alias{update_config_needs}
-\alias{update_config_roxygen}
 \alias{update_config_roxygen_meta}
 \alias{update_config_roxygen_desc}
 \alias{update_config_roxygen_expr}
@@ -16,8 +15,6 @@ make_config_edits(path)
 guess_dcf_indent(dcf)
 
 update_config_needs(dcf)
-
-update_config_roxygen(dcf, root)
 
 update_config_roxygen_meta(path)
 
@@ -42,8 +39,6 @@ Tools for modifying configuration files
 \item \code{guess_dcf_indent()}: Guess the existing dcf indentation
 
 \item \code{update_config_needs()}: Update the Needs section of a DESCRIPTION file
-
-\item \code{update_config_roxygen()}: Update the Roxygen config
 
 \item \code{update_config_roxygen_meta()}: Update the Roxygen man/roxygen/meta.R file
 
