@@ -41,20 +41,8 @@ CONFIG <- paste0(".", utils::packageName(), "_config")  # nolint
 #' shown by concatenating nested keys using `$`.
 #'
 #'  * `format`: An optional `glue`-style string, which can assume values for
-#'    `name`, `type`, `default` and `description`. See `?roxytypes::tags` for
+#'    `name`, `type` and `description`. See `?roxytypes::tags` for
 #'    details on the source of each of these strings.
-#'
-#'  * `defaults$derive`: Whether to try to derive default values for
-#'    documentation. When a function's formal arguments are length-1 atomic
-#'    values (or `NULL`), they can be derived for your documentation.
-#'
-#'  * `defaults$missing`: Either `NULL` or a character value. If a character
-#'    value is provided, it is used in documentation as the default value when
-#'    no default is defined. If `NULL`, missing default values are not included
-#'    in documentation.
-#'
-#'  * `defaults$warn_undocumented`: If `TRUE`, alerts are raised if defaults are
-#'    defined, but not documented.
 #'
 #'  * `verbose`: If `TRUE`, emit extra diagnostic alerts while processing the
 #'    package.

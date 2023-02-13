@@ -20,17 +20,8 @@ The available settings are listed below. Some fields are nested, which are
 shown by concatenating nested keys using \code{$}.
 \itemize{
 \item \code{format}: An optional \code{glue}-style string, which can assume values for
-\code{name}, \code{type}, \code{default} and \code{description}. See \code{?roxytypes::tags} for
+\code{name}, \code{type} and \code{description}. See \code{?roxytypes::tags} for
 details on the source of each of these strings.
-\item \code{defaults$derive}: Whether to try to derive default values for
-documentation. When a function's formal arguments are length-1 atomic
-values (or \code{NULL}), they can be derived for your documentation.
-\item \code{defaults$missing}: Either \code{NULL} or a character value. If a character
-value is provided, it is used in documentation as the default value when
-no default is defined. If \code{NULL}, missing default values are not included
-in documentation.
-\item \code{defaults$warn_undocumented}: If \code{TRUE}, alerts are raised if defaults are
-defined, but not documented.
 \item \code{verbose}: If \code{TRUE}, emit extra diagnostic alerts while processing the
 package.
 }

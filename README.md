@@ -47,13 +47,6 @@ The `@typed` tag expects input in the form:
 #'   <description>
 ```
 
-or
-
-```
-#' @typed <var>: <type> @default <default>
-#'   <description>
-```
-
 The newline after the `type` field is a meaningful delimiter to avoid having to
 disambiguate between type annotations and written descriptions. In practice it
 looks something like this:
@@ -100,23 +93,11 @@ Config/roxytypes: list(format = "(`{type}`): {description}")
 ```
 
 The format string uses `glue` and can be expected to have fields `name`, `type`
-`default` and `description`. The parameter name will always be the named 
-argument value, but may be reused for parts of the description.
+and `description`. The parameter name will always be the named argument value,
+but may be reused for parts of the description.
 
 Altenatively, you can provide a function that accepts the parsed `roxygen2` tag
 and the fields as named arguments.
-
-### Defaults
-
-`roxytypes` can also discover default values if you'd like to include them in
-your documentation. Defaults that are length-1 atomic values (or `NULL`) can be
-picked up automatically, while more complicated defaults need to be annotated
-directly.
-
-Use options `default$derive` to enable derived default documentation,
-`default$missing` to configure how undefined defaults are communicated and
-`default$warn_undocumented` to enable warnings when parameters with defaults are
-left undocumented.
 
 ## [`roxylint`](https://github.com/openpharma/roxylint) compatible
 

@@ -2,14 +2,10 @@
 % Please edit documentation in R/tag_typed.R
 \name{tags}
 \alias{tags}
-\alias{default}
 \alias{typed}
 \title{\code{roxytypes} tags}
 \usage{
 #' @typed <var>: <type>
-#'   <description>
-
-#' @typed <var>: <type> @default <default>
 #'   <description>
 }
 \description{
@@ -21,9 +17,5 @@ Be aware that there are a few syntactic requirements:
 \itemize{
 \item \code{:} delimiter between the variable name and type.
 \item \verb{\\n} after the type to separate it from the description.
-\item \verb{@default} tag can be used to optionally specify a default parameter
-value. If not set, and \code{derive_defaults} is enabled, then atomic,
-length-1 parameter defaults will automatically be used to populate
-default arguments in documentation.
 }
 }
