@@ -13,8 +13,10 @@ Description: Provides typed parameter tags for integration with 'roxygen2'.
 License: MIT + file LICENSE
 Encoding: UTF-8
 URL:
-    https://github.com/openpharma/roxylint,
-    https://openpharma.github.io/roxylint
+    https://github.com/openpharma/roxytypes,
+    https://openpharma.github.io/roxytypes
+BugReports:
+    https://github.com/openpharma/roxytypes/issues
 Imports:
     utils,
     cli,
