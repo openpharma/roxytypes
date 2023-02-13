@@ -2,8 +2,8 @@
 
 <!-- badges: start -->
 [![CRAN](https://img.shields.io/cran/v/roxytypes.svg)](https://cran.r-project.org/package=roxytypes)
-[![R-CMD-check](https://github.com/dgkf/roxytypes/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/dgkf/roxytypes/actions/workflows/R-CMD-check.yaml)
-[![Codecov](https://img.shields.io/codecov/c/github/dgkf/roxytypes/main.svg)](https://app.codecov.io/gh/dgkf/roxytypes)
+[![R-CMD-check](https://github.com/openpharma/roxytypes/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/openpharma/roxytypes/actions/workflows/R-CMD-check.yaml)
+[![Codecov](https://img.shields.io/codecov/c/github/openpharma/roxytypes/main.svg)](https://app.codecov.io/gh/openpharma/roxytypes)
 <!-- badges: end -->
 
 Typed parameter definition `roxygen2` tag
@@ -118,7 +118,7 @@ Use options `default$derive` to enable derived default documentation,
 `default$warn_undocumented` to enable warnings when parameters with defaults are
 left undocumented.
 
-## [`roxylint`](https://github.com/dgkf/roxylint) compatible
+## [`roxylint`](https://github.com/openpharma/roxylint) compatible
 
 `@typed` tags come with their own `roxylint` linters. To benefit from linting of
 `@typed` tags, simply add the `roxylint::roxylint` roclet.
