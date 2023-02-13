@@ -70,17 +70,8 @@ documentation. These are stored as key-values in a <code>list</code> in either t
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>The available settings are listed below. Some fields are nested, which are
 shown by concatenating nested keys using <code>$</code>.</p><ul><li><p><code>format</code>: An optional <code>glue</code>-style string, which can assume values for
-<code>name</code>, <code>type</code>, <code>default</code> and <code>description</code>. See <code><a href="tags.html">?roxytypes::tags</a></code> for
+<code>name</code>, <code>type</code> and <code>description</code>. See <code><a href="tags.html">?roxytypes::tags</a></code> for
 details on the source of each of these strings.</p></li>
-<li><p><code>defaults$derive</code>: Whether to try to derive default values for
-documentation. When a function's formal arguments are length-1 atomic
-values (or <code>NULL</code>), they can be derived for your documentation.</p></li>
-<li><p><code>defaults$missing</code>: Either <code>NULL</code> or a character value. If a character
-value is provided, it is used in documentation as the default value when
-no default is defined. If <code>NULL</code>, missing default values are not included
-in documentation.</p></li>
-<li><p><code>defaults$warn_undocumented</code>: If <code>TRUE</code>, alerts are raised if defaults are
-defined, but not documented.</p></li>
 <li><p><code>verbose</code>: If <code>TRUE</code>, emit extra diagnostic alerts while processing the
 package.</p></li>
 </ul></div>

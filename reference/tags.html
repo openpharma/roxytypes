@@ -52,9 +52,6 @@ roxygen2 tag."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/li
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co">#' @typed &lt;var&gt;: &lt;type&gt;</span></span>
-<span><span class="co">#'   &lt;description&gt;</span></span>
-<span></span>
-<span><span class="co">#' @typed &lt;var&gt;: &lt;type&gt; @default &lt;default&gt;</span></span>
 <span><span class="co">#'   &lt;description&gt;</span></span></code></pre></div>
     </div>
 
@@ -62,10 +59,6 @@ roxygen2 tag."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/li
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>Be aware that there are a few syntactic requirements:</p><ul><li><p><code>:</code> delimiter between the variable name and type.</p></li>
 <li><p><code>\n</code> after the type to separate it from the description.</p></li>
-<li><p><code>@default</code> tag can be used to optionally specify a default parameter
-value. If not set, and <code>derive_defaults</code> is enabled, then atomic,
-length-1 parameter defaults will automatically be used to populate
-default arguments in documentation.</p></li>
 </ul></div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
