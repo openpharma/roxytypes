@@ -42,8 +42,9 @@
 #' }
 #'
 #' @export
-convert <- function(format, ..., unmatched = FALSE, path = ".",
-  verbose = interactive()) {
+convert <- function(path = ".",
+  format = config(path, refresh = TRUE, cache = FALSE)$format, ...,
+  unmatched = FALSE, verbose = interactive()) {
 
   # process format to build expression for matching tag decriptions
   format <- build_format_regex(format, ...)
@@ -268,7 +269,7 @@ make_convert_edits <- function(edits) {
       text <- text[-lines]
 
       # add edited lines
-      text <- append(text, paste0("#' ", edit[[1, "new"]]), after = after)
+      text <- append(text, edit[[1, "new"]], after = after)
     }
 
     writeLines(text, file)

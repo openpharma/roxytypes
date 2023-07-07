@@ -4,9 +4,17 @@
 \alias{convert}
 \title{Convert \code{roxygen2} tags to \code{roxytypes} tags}
 \usage{
-convert(format, ..., unmatched = FALSE, path = ".", verbose = interactive())
+convert(
+  path = ".",
+  format = config(path, refresh = TRUE, cache = FALSE)$format,
+  ...,
+  unmatched = FALSE,
+  verbose = interactive()
+)
 }
 \arguments{
+\item{path}{(\code{character[1]}) A file path within your package. Defaults to the current working directory.}
+
 \item{format}{(\code{character[1]}) A \code{glue}-style format to use to parse types and descriptions for conversion
 to \code{roxytypes} tags. Available \code{glue} keywords include \code{type} and
 \code{description}. By default, \code{type} will match any string until a closing
@@ -19,8 +27,6 @@ information.}
 \code{roxytypes} tags. Such conversions may be convenient if you aim to convert
 your package holistically, as it will help to flag undocumented parameter
 types the next time you re-build your documentation.}
-
-\item{path}{(\code{character[1]}) A file path within your package. Defaults to the current working directory.}
 
 \item{verbose}{(\code{logical[1]}) Indicates whether command-line interface should be emitted so that changes
 can be reviewed interactively.}

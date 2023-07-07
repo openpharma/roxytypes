@@ -50,7 +50,7 @@ build_format_regex <- function(format, format_re, ...,
 
   format_re <- if (!missing(format_re)) {
     format_re
-  } else if (!missing(format)) {
+  } else if (!missing(format) && !is.null(format)) {
     format <- escape_non_glue_re(format)
     glue::glue(format, .envir = as.list(keywords))
   } else {
