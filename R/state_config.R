@@ -54,10 +54,10 @@ CONFIG <- paste0(".", utils::packageName(), "_config")  # nolint
 #' @keywords internal
 config <- function(path = getwd(), refresh = FALSE, cache = TRUE) {
   roxytypes_config <- roxygen2::roxy_meta_get("roxytypes")
-  if (!refresh && !is.null(roxytypes_config))
+  if (!refresh && length(roxytypes_config) > 0)
     return(roxytypes_config)
 
-  config <- config_find_from(getwd())
+  config <- config_find_from(path)
   if (isTRUE(config$verbose)) {
     cli::cli_alert_info("Loading {.pkg {utils::packageName()}} config")
   }
