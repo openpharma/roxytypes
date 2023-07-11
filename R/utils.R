@@ -75,6 +75,48 @@ regex_capture <- function(pattern, x, ...) {
   match
 }
 
+#' A half-baked extract method
+#'
+#' @note
+#' This implementation is considered half-baked because there's no check for
+#' whether a replacement is made that results in the same string. This case
+#' will be interpreted the same as if there was no match.
+#'
+#' @inheritParams base::gsub
+#' @typedreturn character[1]
+#'   The substituted string if a replacement is made, or `NULL` otherwise.
+#'
+#' @name regex-helpers
+#' @keywords internal
+re_extract <- function(pattern, replace, x) {
+  res <- gsub(pattern, replace, x, perl = TRUE)
+  if (res != x) res
+}
+
+#' @describeIn regex-helpers
+#' Extract contents of a backtick-enclosed string
+extract_backticked <- function(x) {
+  re_extract("^\\s*(`+)\\s*((?:(?!\\1).)*?)\\s*\\1\\s*$", "\\2", x)
+}
+
+#' @describeIn regex-helpers
+#' Extract contents of a quoted (single or double) string
+extract_quoted <- function(x) {
+  re_extract("^\\s*([\"'])(.*)\\1\\s*", "\\2", x)
+}
+
+#' @describeIn regex-helpers
+#' Extract contents of a backtick-enclosed string
+is_backticked <- function(x) {
+  grepl("^\\s*(`+)\\s*((?:(?!\\1).)*?)\\s*\\1\\s*$", x, perl = TRUE)
+}
+
+#' @describeIn regex-helpers
+#' Test whether contents are enclosed in brackets
+is_bracketed <- function(x) {
+  grepl("^\\s*\\[[^]].*\\]\\s*", x)
+}
+
 
 #' Find package root directory
 #'

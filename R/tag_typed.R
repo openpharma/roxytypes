@@ -12,6 +12,67 @@
 #' #' @typed <var>: <type>
 #' #'   <description>
 #'
+#' @section Default `type` Parsing Syntax:
+#'
+#' The type portion of the `@typed` tag syntax will handle a bit of syntax as
+#' special cases.
+#'
+#'  * `` [type] ``: Types wrapped in brackets, for example
+#'    `[roxygen2::roxy_tags()]` will be left as-is, without wrapping the string
+#'    in backticks to display as inline code and preserve the native `roxygen2`
+#'    reference link.
+#'
+#'        #' @typed arg: [package::function()]
+#'        #'   long form description.
+#'
+#'  * `` `type` ``: Types wrapped in backticks will be kept as-is. Additional
+#'    backticks will not be inserted.
+#'
+#'        #' @typed arg: `class`
+#'        #'   long form description.
+#'
+#'  * `"type"` or `'type'`: Types wrapped in quotes (either single or double),
+#'    will be provided as literal values, removing the surrounding quotation
+#'    marks.
+#'
+#'        #' @typed arg: "`class_a` or `class_b`"
+#'        #'   depending on the class of the object provided, either an `"A"`
+#'        #'   or a `"B"`.
+#'
+#' @section Custom `type` Parsing Function:
+#'
+#' The above defaults are meant to cover most use cases and should be sufficient
+#' for all but the most elaborate development practices. If you need to go
+#' beyond these default behaviors, you can also provide a parsing function,
+#' accepting the parsed roxygen tag as well as the raw contents.
+#'
+#' The function accepts the [roxygen2::roxy_tag()] produced when parsing the
+#' tag, whose `$val` contains fields `name`, `type` and `description`. For
+#' convenience, the `$val` contents is unpacked as arguments, though the
+#' structure of this tag is liable to change.
+#'
+#' To implement a `typescript`-style class union syntax,
+#'
+#'     #' @typed arg: class_a | class_b | class_c
+#'     #'   depending on the class of the object provided, either an `"A"`
+#'     #'   or a `"B"`.
+#'
+#' to produce the parameter definition
+#'
+#'     (`class_a`, `class_c` or `class_b`) depending on the class of the object
+#'     provided, either an `"A"`, `"B"` or a `"C"`.
+#'
+#' we might define the following in `DESCRIPTION` (or in
+#' `man/roxytypes/meta.R`).
+#'
+#'     Config/roxytypes: list(
+#'       format = function(tag, ..., name, type, description) {
+#'         types <- paste0("`", trimws(strsplit(type, "|", fixed = TRUE)[[1]]), "`")
+#'         types <- glue::glue_collapse(types, sep = ", ", last = " or ")
+#'         paste0("(", types, ") ", description)
+#'       }
+#'     )
+#'
 #' @aliases typed
 #' @name tags
 NULL
@@ -85,14 +146,18 @@ roxy_tag_rd.roxy_tag_typed <- function(x, base_path, env) {  # nolint
 #'
 #' @keywords internal
 default_format <- function(x, name, type, default = NULL, description, ...) {
-  typestr <- type
+  # do not wrap code that starts with `[` (eg [roxygen2::roxy_tag()]) or is
+  # backticked (eg `this is all a class name`)
+  if (is_bracketed(type) || is_backticked(type)) {
+    typestr <- type  # unaffected
 
-  # do not wrap code that starts with:
-  #  - "[": roxygen link, eg (`[roxygen2::roxy_tag()]`)
-  #  - "`": already backticked code
-  #  - '"' or "'": quoted strings
-  if (!grepl("^[[`'\"]", type)) {
-    typestr <- paste0("`", typestr, "`")
+  # unquote literals wrapped in `'` or `"`
+  } else if (!is.null(x <- extract_quoted(type))) {
+    typestr <- x
+
+  # otherwise, assume the raw string is a type and wrap in backticks
+  } else {
+    typestr <- paste0("`", type, "`")
   }
 
   paste0("(", typestr, ") ", description)

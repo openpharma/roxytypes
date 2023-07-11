@@ -25,7 +25,7 @@ and \code{description}, which will be used for restructuring the tag as a
 \item{...}{Additional arguments unused.}
 }
 \value{
-(\code{NULL} or \code{\link[=tag_edit]{tag_edit()}}) If the tag can be converted, a \code{\link[=tag_edit]{tag_edit()}} is returned, otherwise \code{NULL}.
+(``NULL\code{ or [tag_edit()]}) If the tag can be converted, a \code{\link[=tag_edit]{tag_edit()}} is returned, otherwise `NULL`.
 }
 \description{
 Convert a \code{roxygen2} tag to \code{roxytypes} equivalent

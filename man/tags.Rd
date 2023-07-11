@@ -19,3 +19,73 @@ Be aware that there are a few syntactic requirements:
 \item \verb{\\n} after the type to separate it from the description.
 }
 }
+\section{Default \code{type} Parsing Syntax}{
+
+
+The type portion of the \verb{@typed} tag syntax will handle a bit of syntax as
+special cases.
+\itemize{
+\item \verb{[type]}: Types wrapped in brackets, for example
+\verb{[roxygen2::roxy_tags()]} will be left as-is, without wrapping the string
+in backticks to display as inline code and preserve the native \code{roxygen2}
+reference link.
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#' @typed arg: [package::function()]
+#'   long form description.
+}\if{html}{\out{</div>}}
+\item \code{`type`}: Types wrapped in backticks will be kept as-is. Additional
+backticks will not be inserted.
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#' @typed arg: `class`
+#'   long form description.
+}\if{html}{\out{</div>}}
+\item \code{"type"} or \code{'type'}: Types wrapped in quotes (either single or double),
+will be provided as literal values, removing the surrounding quotation
+marks.
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#' @typed arg: "`class_a` or `class_b`"
+#'   depending on the class of the object provided, either an `"A"`
+#'   or a `"B"`.
+}\if{html}{\out{</div>}}
+}
+}
+
+\section{Custom \code{type} Parsing Function}{
+
+
+The above defaults are meant to cover most use cases and should be sufficient
+for all but the most elaborate development practices. If you need to go
+beyond these default behaviors, you can also provide a parsing function,
+accepting the parsed roxygen tag as well as the raw contents.
+
+The function accepts the \code{\link[roxygen2:roxy_tag]{roxygen2::roxy_tag()}} produced when parsing the
+tag, whose \verb{$val} contains fields \code{name}, \code{type} and \code{description}. For
+convenience, the \verb{$val} contents is unpacked as arguments, though the
+structure of this tag is liable to change.
+
+To implement a \code{typescript}-style class union syntax,
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#' @typed arg: class_a | class_b | class_c
+#'   depending on the class of the object provided, either an `"A"`
+#'   or a `"B"`.
+}\if{html}{\out{</div>}}
+
+to produce the parameter definition
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{(`class_a`, `class_c` or `class_b`) depending on the class of the object
+provided, either an `"A"`, `"B"` or a `"C"`.
+}\if{html}{\out{</div>}}
+
+we might define the following in \code{DESCRIPTION} (or in
+\code{man/roxytypes/meta.R}).
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{Config/roxytypes: list(
+  format = function(tag, ..., name, type, description) \{
+    types <- paste0("`", trimws(strsplit(type, "|", fixed = TRUE)[[1]]), "`")
+    types <- glue::glue_collapse(types, sep = ", ", last = " or ")
+    paste0("(", types, ") ", description)
+  \}
+)
+}\if{html}{\out{</div>}}
+}
+
