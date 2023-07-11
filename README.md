@@ -28,7 +28,7 @@ If that's not the case, you can specify your own format. For example, if your
 types were in square brackets, you could specify a format like:
 
 ```r
-roxytypes::convert("[`{type}`] {description}")
+roxytypes::convert(format = "[`{type}`] {description}")
 ```
 
 By default, conversions will only happen if an existing type is found using the
@@ -98,6 +98,8 @@ but may be reused for parts of the description.
 
 Altenatively, you can provide a function that accepts the parsed `roxygen2` tag
 and the fields as named arguments.
+
+For more advanced formatting, see `?tags` or `?typed`.
 
 ## [`roxylint`](https://github.com/openpharma/roxylint) compatible
 

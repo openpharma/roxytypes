@@ -51,6 +51,7 @@ roxy_tag_parse.roxy_tag_typedreturn <- function(x) {  # nolint
 roxy_tag_rd.roxy_tag_typedreturn <- function(x, base_path, env) {  # nolint
   config <- config()
   format <- config$format %||% default_format
+
   desc <- if (is.function(format)) {
     do.call(format, append(list(x), x$val))
   } else {
