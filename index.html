@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="index.html">roxytypes</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9002</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -79,7 +79,7 @@
 <p>You’ll be prompted with a preview of changes and the option to continue by making edits or aborting changes. By default, will look for type signatures as parenthesized inline code at the start of your descriptions. That is, that descriptions are written like <code>(`type`) description</code>.</p>
 <p>If that’s not the case, you can specify your own format. For example, if your types were in square brackets, you could specify a format like:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">roxytypes</span><span class="fu">::</span><span class="fu"><a href="reference/convert.html">convert</a></span><span class="op">(</span><span class="st">"[`{type}`] {description}"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">roxytypes</span><span class="fu">::</span><span class="fu"><a href="reference/convert.html">convert</a></span><span class="op">(</span>format <span class="op">=</span> <span class="st">"[`{type}`] {description}"</span><span class="op">)</span></span></code></pre></div>
 <p>By default, conversions will only happen if an existing type is found using the provided type format. If you’d like to convert all possible tags, pass <code>unmatched = TRUE</code>. However new typed tags will only be partially populated and will produce documentation notes until they are filled in.</p>
 </div>
 <div class="section level3">
@@ -123,6 +123,7 @@
 <pre><code><span><span class="va">Config</span><span class="op">/</span><span class="va">roxytypes</span><span class="op">:</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>format <span class="op">=</span> <span class="st">"(`{type}`): {description}"</span><span class="op">)</span></span></code></pre>
 <p>The format string uses <code>glue</code> and can be expected to have fields <code>name</code>, <code>type</code> and <code>description</code>. The parameter name will always be the named argument value, but may be reused for parts of the description.</p>
 <p>Altenatively, you can provide a function that accepts the parsed <code>roxygen2</code> tag and the fields as named arguments.</p>
+<p>For more advanced formatting, see <code><a href="reference/tags.html">?tags</a></code> or <code><a href="reference/tags.html">?typed</a></code>.</p>
 </div>
 </div>
 <div class="section level2">
