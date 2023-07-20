@@ -147,7 +147,7 @@ roxy_tag_rd.roxy_tag_typed <- function(x, base_path, env) {  # nolint
 #' @return A formatted character value.
 #'
 #' @export
-default_format <- function(x, name, type, default = NULL, description, ...) {
+default_format <- function(x, name, type, description, ...) {
   paste0("(", as.character(type), ") ", as.character(description))
 }
 

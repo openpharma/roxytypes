@@ -1,4 +1,4 @@
-# roxytypes (development version)
+# roxytypes 0.0.0.dev
 
 * Automatically apply default formatting based on field types. For `type` 
   fields, this will perform a default formatting 
