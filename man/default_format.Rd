@@ -19,4 +19,3 @@ A formatted character value.
 \description{
 Adds special cases for when the type uses other roxygen2 syntax
 }
-\keyword{internal}

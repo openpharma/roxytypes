@@ -1,5 +1,10 @@
 # roxytypes (development version)
 
+* Automatically apply default formatting based on field types. For `type` 
+  fields, this will perform a default formatting 
+  (see `roxytypes:::as.character.roxy_tag_field_type`). To use another 
+  formatting style in a config, use `"{unclass(type)}"` (@dgkf #13)
+
 * Improved the stability of some custom formatting syntax, and improved
   documentation for user-provided custom formatting functions. (@dgkf #11)
 

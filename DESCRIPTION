@@ -1,6 +1,6 @@
 Package: roxytypes
 Title: Provides Typed Parameter Tags for Integration with 'roxygen2'
-Version: 0.0.0.9002
+Version: 0.0.0.9003
 Authors@R:
     c(
       person(
