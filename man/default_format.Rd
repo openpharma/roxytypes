@@ -4,7 +4,7 @@
 \alias{default_format}
 \title{Default formatter for \verb{@typed}}
 \usage{
-default_format(x, name, type, default = NULL, description, ...)
+default_format(x, name, type, description, ...)
 }
 \arguments{
 \item{x}{(\code{\link[roxygen2:roxy_tag]{roxygen2::roxy_tag()}}) The tag to format.}
@@ -19,4 +19,3 @@ A formatted character value.
 \description{
 Adds special cases for when the type uses other roxygen2 syntax
 }
-\keyword{internal}

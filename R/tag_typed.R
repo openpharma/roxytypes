@@ -94,9 +94,11 @@ roxy_tag_parse.roxy_tag_typed <- function(x) {  # nolint
     roxygen2::warn_roxy_tag(x, errors$parse_syntax(x$tag))
     x$val <- list(name = er, type = er, description = er)
     return(x)
+  } else {
+    x$val <- as.list(trimws(parsed[1, ]))
   }
 
-  x$val <- as.list(trimws(parsed[1, ]))
+  x$val <- with_roxy_field_subclass(x$val)
   x
 }
 
@@ -144,25 +146,27 @@ roxy_tag_rd.roxy_tag_typed <- function(x, base_path, env) {  # nolint
 #'
 #' @return A formatted character value.
 #'
-#' @keywords internal
-default_format <- function(x, name, type, default = NULL, description, ...) {
-  # do not wrap code that starts with `[` (eg [roxygen2::roxy_tag()]) or is
-  # backticked (eg `this is all a class name`)
-  if (is_bracketed(type) || is_backticked(type)) {
-    typestr <- type  # unaffected
-
-  # unquote literals wrapped in `'` or `"`
-  } else if (!is.null(x <- extract_quoted(type))) {
-    typestr <- x
-
-  # otherwise, assume the raw string is a type and wrap in backticks
-  } else {
-    typestr <- paste0("`", type, "`")
-  }
-
-  paste0("(", typestr, ") ", description)
+#' @export
+default_format <- function(x, name, type, description, ...) {
+  paste0("(", as.character(type), ") ", as.character(description))
 }
 
+#' @export
+as.character.roxy_tag_field_type <- function(x, ...) {
+  # do not wrap code that starts with `[` (eg [roxygen2::roxy_tag()]) or is
+  # backticked (eg `this is all a class name`)
+  if (is_bracketed(x) || is_backticked(x)) {
+    unclass(x)  # unaffected
+
+  } else if (!is.null(unwrapped_x <- extract_quoted(x))) {
+    # unquote literals wrapped in `'` or `"`
+    unclass(unwrapped_x)
+
+  } else {
+    # otherwise, assume the raw string is a type and wrap in backticks
+    paste0("`", x, "`")
+  }
+}
 
 #' Parse a raw `@typed` tag
 #'

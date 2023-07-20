@@ -153,3 +153,28 @@ read_dcf_asis <- function(path) {
   tmp <- read.dcf(path, keep.white = TRUE, all = TRUE)
   read.dcf(path, keep.white = colnames(tmp), all = TRUE)
 }
+
+
+#' A helper to apply field names to all roxy_tag val fields
+#'
+#' @typed x: list
+#'   A named list of tag val contents
+#'
+#' @typedreturn: list
+#'   A nearly identical list, where elements have additional subclasses based 
+#'   on their field names.
+#'
+with_roxy_field_subclass <- function(x) {
+  mapply(
+    function(k, v) {
+      structure(v, class = c(
+        paste0("roxy_tag_field_", k),
+        "roxy_tag_field",
+        class(v)
+      ))
+    },
+    names(x),
+    x,
+    SIMPLIFY = FALSE
+  )
+}

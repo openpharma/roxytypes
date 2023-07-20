@@ -31,10 +31,11 @@ roxy_tag_parse.roxy_tag_typedreturn <- function(x) {  # nolint
     er <- "<parse error>"
     roxygen2::warn_roxy_tag(x, errors$parse_syntax(x$tag))
     x$val <- list(type = er, description = er)
-    return(x)
+  } else {
+    x$val <- as.list(trimws(parsed[1, ]))
   }
 
-  x$val <- as.list(trimws(parsed[1, ]))
+  x$val <- with_roxy_field_subclass(x$val)
   x
 }
 
