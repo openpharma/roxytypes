@@ -17,13 +17,6 @@ config_from_file(path = ".")
 \item{path}{(\code{character[1]}) A file path to use when searching for a config file. Either the file path
 to a \code{DESCRIPTION} or the root path of a package, depending on the context
 of the function.}
-
-\item{x}{(\code{roxy_tag}) An internal, intermediate \code{roxygen2} tag object upon which to evaluate
-configured behaviors.}
-
-\item{config}{(\code{list(format= )}) A list of configuration parameters.}
-
-\item{e}{(\code{environment}) A package environment used while running \code{roxygen2}.}
 }
 \description{
 Various functions for loading, caching and performing configured behaviors

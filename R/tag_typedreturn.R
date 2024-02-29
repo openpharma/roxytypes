@@ -3,9 +3,8 @@
 #' The `@typedreturn` tag introduces a syntax for defining return types as a
 #' `roxygen2` tag.
 #'
-#' There are a couple important syntactic features:
+#' There is one important syntactic features:
 #'
-#'   * `:` delimiter between the variable name and type.
 #'   * `\n` after the type to separate it from the description.
 #'
 #' @usage
@@ -21,6 +20,8 @@ NULL
 #' Parse a `@typedreturn` tag and return parsed components as value
 #'
 #' @inheritParams roxygen2::roxy_tag_parse
+#' @typedreturn roxygen2 tag
+#'   A parsed `roxygen2` `@typedreturn` rd_tag.
 #'
 #' @importFrom roxygen2 roxy_tag_parse
 #' @exportS3Method
@@ -45,6 +46,8 @@ roxy_tag_parse.roxy_tag_typedreturn <- function(x) {  # nolint
 #' Push typed fields into `@param` section
 #'
 #' @inheritParams roxygen2::roxy_tag_rd
+#' @typedreturn [roxygen2::rd_section]
+#'   A `roxygen2` `@value` rd_tag with formatted type information.
 #'
 #' @importFrom glue glue
 #' @importFrom roxygen2 roxy_tag_rd

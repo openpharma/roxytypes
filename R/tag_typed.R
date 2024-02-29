@@ -83,6 +83,8 @@ NULL
 #' Parse a `@typed` tag and return parsed components as value
 #'
 #' @inheritParams roxygen2::roxy_tag_parse
+#' @typedreturn roxygen2 tag
+#'   A parsed `roxygen2` `@typed` rd_tag.
 #'
 #' @importFrom roxygen2 roxy_tag_parse
 #' @exportS3Method
@@ -108,6 +110,8 @@ roxy_tag_parse.roxy_tag_typed <- function(x) {  # nolint
 #' Push typed fields into `@param` section
 #'
 #' @inheritParams roxygen2::roxy_tag_rd
+#' @typedreturn [roxygen2::rd_section]
+#'   A `roxygen2` "param" rd_section with formatted type information.
 #'
 #' @importFrom glue glue
 #' @importFrom roxygen2 roxy_tag_rd

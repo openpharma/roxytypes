@@ -1,6 +1,6 @@
 #' Tools for modifying configuration files
 #'
-#' @typed path,root: character[1]
+#' @typed path: character[1]
 #'   A file path within the package directory.
 #' @typed dcf: data.frame
 #'   The result of [read.dcf()] on the package description file.

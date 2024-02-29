@@ -38,6 +38,9 @@ matches any string.}
 
 \item{x}{(\code{character[1]}) A string to escape.}
 }
+\value{
+(\verb{character[1]:}) A regular expression string, built from component sub-expressions.
+}
 \description{
 Allow \code{glue}-style formatting using keyworded regular expressions. The
 original \code{glue} string (anything that isn't expanded by \code{glue}) is treated as
