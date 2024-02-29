@@ -42,10 +42,12 @@
 #' }
 #'
 #' @export
-convert <- function(path = ".",
-  format = config(path, refresh = TRUE, cache = FALSE)$format, ...,
-  unmatched = FALSE, verbose = interactive()) {
-
+convert <- function(
+    path = ".",
+    format = config(path, refresh = TRUE, cache = FALSE)$format,
+    ...,
+    unmatched = FALSE,
+    verbose = interactive()) {
   # process format to build expression for matching tag decriptions
   format <- build_format_regex(format, ...)
 
@@ -62,11 +64,15 @@ convert <- function(path = ".",
   edits <- build_convert_edits(format, tags, unmatched = unmatched)
 
   continue <- 3
-  if (nrow(edits) > 0 && verbose) repeat {
-    preview_convert_edits(edits, n = continue)
-    continue <- convert_continue_prompt()
-    if (isTRUE(continue)) break  # continue with edits
-    if (!is.numeric(continue)) return(invisible(FALSE))  # abort
+  if (nrow(edits) > 0 && verbose) {
+    repeat {
+      preview_convert_edits(edits, n = continue)
+      continue <- convert_continue_prompt()
+      if (isTRUE(continue)) break # continue with edits
+      if (!is.numeric(continue)) {
+        return(invisible(FALSE))
+      } # abort
+    }
   }
 
   n_edits <- make_convert_edits(edits)

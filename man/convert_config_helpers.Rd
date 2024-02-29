@@ -23,7 +23,7 @@ update_config_roxygen_desc(dcf)
 update_config_roxygen_expr(expr)
 }
 \arguments{
-\item{path, root}{(\code{character[1]}) A file path within the package directory.}
+\item{path}{(\code{character[1]}) A file path within the package directory.}
 
 \item{dcf}{(\code{data.frame}) The result of \code{\link[=read.dcf]{read.dcf()}} on the package description file.}
 

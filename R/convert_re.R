@@ -27,6 +27,9 @@
 #'   A regular expression to use to match a parameter description. By default,
 #'   matches any string.
 #'
+#' @typedreturn character[1]:
+#'   A regular expression string, built from component sub-expressions.
+#'
 #' @examples
 #' re <- roxytypes:::build_format_regex(
 #'   "{as}{any}{bs}",
@@ -37,9 +40,12 @@
 #'
 #' roxytypes:::regex_capture(re, "aaaa\n\nbb", perl = TRUE)
 #'
-build_format_regex <- function(format, format_re, ...,
-  type = re_backticked(), description = re_any()) {
-
+build_format_regex <- function(
+    format,
+    format_re,
+    ...,
+    type = re_backticked(),
+    description = re_any()) {
   keywords <- list(..., type = type, description = description)
   keywords <- mapply(
     function(k, v) glue::glue("(?<{k}>{v})"),

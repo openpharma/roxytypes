@@ -20,7 +20,7 @@ format_diff_chr(d, offset)
 diff_lines(d)
 }
 \arguments{
-\item{n}{The number of tags to preview}
+\item{n}{(\code{integer[1]}) A number of edits to display.}
 
 \item{edit, edits}{(\code{data.frame}) As produced by \code{convert_edit_df}. Contains the edit source file, starting
 line number, number of original lines modified, the new content to insert
@@ -30,15 +30,6 @@ and whether the format was matched for the edit. When singular, the
 \item{d}{(\code{\link[cli:diff_chr]{cli::diff_chr()}} result) The diff of the original and new tag contents.}
 
 \item{offset}{(\code{integer[1]}) A line offset for the start of the diff.}
-
-\item{format}{(\code{string}) A regular expression to use to match existing param definitions.}
-
-\item{unmatched}{(\code{logical[1]}) Indicates whether \verb{@param} tags that don't match the expected pattern
-should be converted anyways. In such cases, their entire description is
-migrated to a new \verb{@typed} description and the new \verb{@typed} tag's type is
-left blank.}
-
-\item{tags}{A list of \code{\link[roxygen2:roxy_tag]{roxygen2::roxy_tag()}}s to preview}
 }
 \value{
 \code{NULL}

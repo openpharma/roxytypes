@@ -7,13 +7,6 @@
 #' documentation is being built to avoid constantly parsing configurations
 #' during evaluation of each tag.
 #'
-#' @typed x: roxy_tag
-#'   An internal, intermediate `roxygen2` tag object upon which to evaluate
-#'   configured behaviors.
-#' @typed config: list(format= )
-#'   A list of configuration parameters.
-#' @typed e: environment
-#'   A package environment used while running `roxygen2`.
 #' @typed path: character[1]
 #'   A file path to use when searching for a config file. Either the file path
 #'   to a `DESCRIPTION` or the root path of a package, depending on the context
@@ -50,8 +43,8 @@ CONFIG <- paste0(".", utils::packageName(), "_config")  # nolint
 #' @typedreturn list
 #'   A named list of configured behaviors.
 #'
-#' @importFrom cli cli_alert_info
 #' @keywords internal
+#' @importFrom cli cli_alert_info
 config <- function(path = getwd(), refresh = FALSE, cache = TRUE) {
   roxytypes_config <- roxygen2::roxy_meta_get("roxytypes")
   if (!refresh && length(roxytypes_config) > 0)
@@ -111,8 +104,8 @@ config_from_desc <- function(path = ".") {
 #' @describeIn config_helpers
 #' Load a configuration from a dotfile
 #'
-#' @importFrom utils packageName
 #' @keywords internal
+#' @importFrom utils packageName
 config_from_file <- function(path = ".") {
   pattern <- "^meta\\.[rR]"
 

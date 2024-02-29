@@ -12,9 +12,8 @@ The \verb{@typedreturn} tag introduces a syntax for defining return types as a
 \code{roxygen2} tag.
 }
 \details{
-There are a couple important syntactic features:
+There is one important syntactic features:
 \itemize{
-\item \code{:} delimiter between the variable name and type.
 \item \verb{\\n} after the type to separate it from the description.
 }
 }

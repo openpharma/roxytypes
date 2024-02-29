@@ -3,16 +3,6 @@
 #' Various functions for supporting conversion from standard roxygen tags to
 #' `@typed` tags.
 #'
-#' @typed format: string
-#'   A regular expression to use to match existing param definitions.
-#' @typed tags: list(roxy_tag)
-#'   A selection of [roxygen2::roxy_tag()]s that should be considered or
-#'   converted.
-#' @typed unmatched: logical[1]
-#'   Indicates whether `@param` tags that don't match the expected pattern
-#'   should be converted anyways. In such cases, their entire description is
-#'   migrated to a new `@typed` description and the new `@typed` tag's type is
-#'   left blank.
 #' @typed edit,edits: data.frame
 #'   As produced by `convert_edit_df`. Contains the edit source file, starting
 #'   line number, number of original lines modified, the new content to insert
@@ -63,9 +53,6 @@ convert_continue_prompt <- function() {
 
 #' @describeIn convert_helpers
 #' Preview diffs after applying conversion rules
-#'
-#' @param tags A list of [roxygen2::roxy_tag()]s to preview
-#' @param n The number of tags to preview
 #'
 #' @return `NULL`
 #'

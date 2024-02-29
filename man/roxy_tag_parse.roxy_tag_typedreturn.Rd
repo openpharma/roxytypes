@@ -9,6 +9,9 @@
 \arguments{
 \item{x}{A tag}
 }
+\value{
+(\verb{roxygen2 tag}) A parsed \code{roxygen2} \verb{@typedreturn} rd_tag.
+}
 \description{
 Parse a \verb{@typedreturn} tag and return parsed components as value
 }

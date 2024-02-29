@@ -13,6 +13,9 @@
 
 \item{env}{Environment in which to evaluate code (if needed)}
 }
+\value{
+(\link[roxygen2:rd_section]{roxygen2::rd_section}) A \code{roxygen2} "param" rd_section with formatted type information.
+}
 \description{
 Push typed fields into \verb{@param} section
 }
