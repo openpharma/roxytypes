@@ -1,117 +1,41 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/associated_block.html</loc>
-  </url>
-  <url>
-    <loc>/reference/build_convert_edits.html</loc>
-  </url>
-  <url>
-    <loc>/reference/build_format_regex.html</loc>
-  </url>
-  <url>
-    <loc>/reference/clear_state.html</loc>
-  </url>
-  <url>
-    <loc>/reference/config.html</loc>
-  </url>
-  <url>
-    <loc>/reference/config_helpers.html</loc>
-  </url>
-  <url>
-    <loc>/reference/convert.html</loc>
-  </url>
-  <url>
-    <loc>/reference/convert_config_helpers.html</loc>
-  </url>
-  <url>
-    <loc>/reference/convert_helpers.html</loc>
-  </url>
-  <url>
-    <loc>/reference/convert_match_format.html</loc>
-  </url>
-  <url>
-    <loc>/reference/convert_tag.html</loc>
-  </url>
-  <url>
-    <loc>/reference/default_format.html</loc>
-  </url>
-  <url>
-    <loc>/reference/find_package_root.html</loc>
-  </url>
-  <url>
-    <loc>/reference/if-not-null-else.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/make_convert_edits.html</loc>
-  </url>
-  <url>
-    <loc>/reference/read_dcf_asis.html</loc>
-  </url>
-  <url>
-    <loc>/reference/regex-helpers.html</loc>
-  </url>
-  <url>
-    <loc>/reference/regex_capture.html</loc>
-  </url>
-  <url>
-    <loc>/reference/roxy_tag_parse.roxy_tag_typed.html</loc>
-  </url>
-  <url>
-    <loc>/reference/roxy_tag_parse.roxy_tag_typedreturn.html</loc>
-  </url>
-  <url>
-    <loc>/reference/roxy_tag_rd.roxy_tag_typed.html</loc>
-  </url>
-  <url>
-    <loc>/reference/roxy_tag_rd.roxy_tag_typedreturn.html</loc>
-  </url>
-  <url>
-    <loc>/reference/roxygen_blocks.html</loc>
-  </url>
-  <url>
-    <loc>/reference/split_and_trim.html</loc>
-  </url>
-  <url>
-    <loc>/reference/tag_edit.html</loc>
-  </url>
-  <url>
-    <loc>/reference/tags.html</loc>
-  </url>
-  <url>
-    <loc>/reference/try_parse_typed.html</loc>
-  </url>
-  <url>
-    <loc>/reference/try_parse_typedreturn.html</loc>
-  </url>
-  <url>
-    <loc>/reference/typedreturn.html</loc>
-  </url>
-  <url>
-    <loc>/reference/vapply_helpers.html</loc>
-  </url>
-  <url>
-    <loc>/reference/with_roxy_field_subclass.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/LICENSE-text.html</loc></url>
+<url><loc>/LICENSE.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/news/index.html</loc></url>
+<url><loc>/reference/associated_block.html</loc></url>
+<url><loc>/reference/build_convert_edits.html</loc></url>
+<url><loc>/reference/build_format_regex.html</loc></url>
+<url><loc>/reference/clear_state.html</loc></url>
+<url><loc>/reference/config.html</loc></url>
+<url><loc>/reference/config_helpers.html</loc></url>
+<url><loc>/reference/convert.html</loc></url>
+<url><loc>/reference/convert_config_helpers.html</loc></url>
+<url><loc>/reference/convert_helpers.html</loc></url>
+<url><loc>/reference/convert_match_format.html</loc></url>
+<url><loc>/reference/convert_tag.html</loc></url>
+<url><loc>/reference/default_format.html</loc></url>
+<url><loc>/reference/find_package_root.html</loc></url>
+<url><loc>/reference/if-not-null-else.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/make_convert_edits.html</loc></url>
+<url><loc>/reference/read_dcf_asis.html</loc></url>
+<url><loc>/reference/regex-helpers.html</loc></url>
+<url><loc>/reference/regex_capture.html</loc></url>
+<url><loc>/reference/roxy_tag_parse.roxy_tag_typed.html</loc></url>
+<url><loc>/reference/roxy_tag_parse.roxy_tag_typedreturn.html</loc></url>
+<url><loc>/reference/roxy_tag_rd.roxy_tag_typed.html</loc></url>
+<url><loc>/reference/roxy_tag_rd.roxy_tag_typedreturn.html</loc></url>
+<url><loc>/reference/roxygen_blocks.html</loc></url>
+<url><loc>/reference/split_and_trim.html</loc></url>
+<url><loc>/reference/tag_edit.html</loc></url>
+<url><loc>/reference/tags.html</loc></url>
+<url><loc>/reference/try_parse_typed.html</loc></url>
+<url><loc>/reference/try_parse_typedreturn.html</loc></url>
+<url><loc>/reference/typedreturn.html</loc></url>
+<url><loc>/reference/vapply_helpers.html</loc></url>
+<url><loc>/reference/with_roxy_field_subclass.html</loc></url>
 </urlset>
+
