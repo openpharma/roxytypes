@@ -58,7 +58,7 @@ build_format_regex <- function(
     format_re
   } else if (!missing(format) && !is.null(format)) {
     format <- escape_non_glue_re(format)
-    glue::glue(format, .envir = as.list(keywords))
+    glue::glue_data(as.list(keywords), format)
   } else {
     "(?<description>.*)"
   }
