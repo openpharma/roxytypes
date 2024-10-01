@@ -1,3 +1,9 @@
+# roxytypes v0.1.1
+
+* Updates use of `glue::glue`, which previously made use of
+  soon-to-be-deprecated behavior. Thanks to @jennybc reverse dependency checks
+  and subsequent PR #15.
+
 # roxytypes v0.1.0
 
 * first CRAN release
