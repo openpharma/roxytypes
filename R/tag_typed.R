@@ -124,7 +124,7 @@ roxy_tag_rd.roxy_tag_typed <- function(x, base_path, env) {  # nolint
   desc <- if (is.function(format)) {
     do.call(format, append(list(x), x$val))
   } else {
-    glue::glue(format, .envir = x$val)
+    glue::glue_data(.x = as.list(x$val), format)
   }
 
   # handle markdown-style formatting using roxygen2 internals

@@ -1,3 +1,8 @@
+# roxytypes v0.1.2
+
+* Further fixes to `glue::glue` use, a continuation of the fixes in v0.1.1.
+  (@dgkf #18)
+
 # roxytypes v0.1.1
 
 * Updates use of `glue::glue`, which previously made use of
